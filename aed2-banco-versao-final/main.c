@@ -1,3 +1,14 @@
+/****************************************************************************
+*	Título : AED2 - app - banco®											*
+*	Autores : Rodrigo Ralha, Ana Gomes, Inês Marques						*
+*																			*
+*	Desenvolvido em Windows 10 e Windows 11 na Plataforma : x64				*
+*	Notas : Programa escrito principalmente em Português					*
+*	O código pode ter problemas de compatibilidade com outros OS			*
+*																			*
+*	Data : 31 / 03 / 2022  Disciplina : Algoritmos e Estruturas de dados 2	*
+*****************************************************************************/
+
 #include "master.h"
 #include "structs.h"
 #include "methods.h"
