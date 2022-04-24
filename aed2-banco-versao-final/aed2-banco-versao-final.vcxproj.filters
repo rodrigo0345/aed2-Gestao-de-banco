@@ -1,0 +1,101 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Arquivos de Origem">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Arquivos de Cabeçalho">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="Arquivos de Recurso">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Clientes">
+      <UniqueIdentifier>{c90af872-7e16-41ee-8176-1fbda3c03a7c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contas">
+      <UniqueIdentifier>{7e67ece6-f13c-486e-b675-ba6544eaa541}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Operacoes">
+      <UniqueIdentifier>{490d2d6d-2e8f-47c8-96f1-16473999c831}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="master.h">
+      <Filter>Arquivos de Cabeçalho</Filter>
+    </ClInclude>
+    <ClInclude Include="methods.h">
+      <Filter>Arquivos de Cabeçalho</Filter>
+    </ClInclude>
+    <ClInclude Include="structs.h">
+      <Filter>Arquivos de Cabeçalho</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="dialogos.c">
+      <Filter>Arquivos de Origem</Filter>
+    </ClCompile>
+    <ClCompile Include="files.c">
+      <Filter>Arquivos de Origem</Filter>
+    </ClCompile>
+    <ClCompile Include="linked_list.c">
+      <Filter>Arquivos de Origem</Filter>
+    </ClCompile>
+    <ClCompile Include="main.c">
+      <Filter>Arquivos de Origem</Filter>
+    </ClCompile>
+    <ClCompile Include="security.c">
+      <Filter>Arquivos de Origem</Filter>
+    </ClCompile>
+    <ClCompile Include="time.c">
+      <Filter>Arquivos de Origem</Filter>
+    </ClCompile>
+    <ClCompile Include="consultar_cliente.c">
+      <Filter>Clientes</Filter>
+    </ClCompile>
+    <ClCompile Include="criar_cliente.c">
+      <Filter>Clientes</Filter>
+    </ClCompile>
+    <ClCompile Include="editar_cliente.c">
+      <Filter>Clientes</Filter>
+    </ClCompile>
+    <ClCompile Include="listar_cliente.c">
+      <Filter>Clientes</Filter>
+    </ClCompile>
+    <ClCompile Include="remover_cliente.c">
+      <Filter>Clientes</Filter>
+    </ClCompile>
+    <ClCompile Include="consultar_conta.c">
+      <Filter>Contas</Filter>
+    </ClCompile>
+    <ClCompile Include="criar_conta.c">
+      <Filter>Contas</Filter>
+    </ClCompile>
+    <ClCompile Include="editar_conta.c">
+      <Filter>Contas</Filter>
+    </ClCompile>
+    <ClCompile Include="listar_conta.c">
+      <Filter>Contas</Filter>
+    </ClCompile>
+    <ClCompile Include="remover_conta.c">
+      <Filter>Contas</Filter>
+    </ClCompile>
+    <ClCompile Include="depositar.c">
+      <Filter>Operacoes</Filter>
+    </ClCompile>
+    <ClCompile Include="levantar.c">
+      <Filter>Operacoes</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="clientes.csv">
+      <Filter>Arquivos de Recurso</Filter>
+    </None>
+    <None Include="contas.csv">
+      <Filter>Arquivos de Recurso</Filter>
+    </None>
+  </ItemGroup>
+</Project>
