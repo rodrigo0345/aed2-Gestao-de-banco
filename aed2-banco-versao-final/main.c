@@ -40,7 +40,9 @@ int main(int argc, char* argv[])
 
 	/* main loop do programa */
 	Main_MainLoop(&clts, &cnts, &clts_size, &cnts_size);
+
 	system("cls");
+	system("pause");
 
 	Security_ProgramExit_Global(clts, cnts);
 }

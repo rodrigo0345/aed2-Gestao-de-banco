@@ -92,12 +92,14 @@ uint Security_Login(Clientes** clts, Clientes** result, char* guess, uint* id)
 
 	*result = LinkedList_BinarySearch_Clientes(*clts, *id);
 
-	if (result == NULL)
+	if (*result == NULL)
 	{
 		printf("Cliente não encontrado!");
 		getchar();
 		return 0;
 	}
+
+	/* ainda existe aqui um problema, ainda não sei porque */
 	if (strcmp(guess, (*result)->pin))
 	{
 		printf("PIN incorreto!");

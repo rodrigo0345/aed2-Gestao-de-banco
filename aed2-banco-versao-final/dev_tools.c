@@ -11,8 +11,10 @@ void DevTools_Generate(long number)
 	fprintf(clientes, "%s\n", header_clientes);
 	fprintf(contas, "%s\n", header_contas);
 
-	if (number == 1)
+	if (number == 5)
 	{
+		fprintf(clientes, "%s", "");
+		fprintf(contas, "%s", "");
 		return;
 	}
 	
@@ -49,10 +51,10 @@ void DevTools_Options()
 	printf("[0] - reset clientes.csv e contas.csv \n");
 	printf("[1] - 50 clientes e 50 contas \n");
 	printf("[2] - 500 clientes e 500 contas \n");
-	printf("[2] - 5.000 clientes e 5.000 contas \n");
-	printf("[3] - 50.000 clientes e 50.000 contas \n");
-	printf("[4] - 500.000 clientes e 500.000 contas \n");
-	printf("[5] - 5.000.000 clientes e 5.000.000 contas \n");
+	printf("[3] - 5.000 clientes e 5.000 contas \n");
+	printf("[4] - 50.000 clientes e 50.000 contas \n");
+	printf("[5] - 500.000 clientes e 500.000 contas \n");
+	printf("[6] - 5.000.000 clientes e 5.000.000 contas \n");
 
 	int opcao;
 	scanf("%d", &opcao);
