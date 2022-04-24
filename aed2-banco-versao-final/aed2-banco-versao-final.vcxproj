@@ -149,6 +149,7 @@
     <ClCompile Include="criar_cliente.c" />
     <ClCompile Include="criar_conta.c" />
     <ClCompile Include="depositar.c" />
+    <ClCompile Include="dev_tools.c" />
     <ClCompile Include="dialogos.c" />
     <ClCompile Include="editar_cliente.c" />
     <ClCompile Include="editar_conta.c" />

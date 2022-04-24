@@ -9,9 +9,23 @@ Clientes* LinkedList_New_Clientes()
 	Clientes* tmp = malloc(sizeof(Clientes));
 	if (tmp == NULL) Security_Error("linked_list.c//LinkedList_New_Clientes//tmp");
 
+	/* informacoes padrao que precisam de ser NULL */
 	tmp->next = NULL;
 	tmp->prev = NULL;
 	tmp->contas_associadas = NULL;
+
+	return tmp;
+}
+
+/* Inicializa e Retorna uma struct do tipo Contas* */
+Contas* LinkedList_New_Contas()
+{
+	Contas* tmp = (Contas*)malloc(sizeof(Contas));
+	if (tmp == NULL) Security_Error("linked_list.c//LinkedList_New_Contas//tmp");
+
+	/* informacoes padrao que precisam de ser NULL */
+	tmp->next = NULL;
+	tmp->prev = NULL;
 
 	return tmp;
 }
@@ -21,6 +35,26 @@ void LinkedList_AppendHead_Clientes(Clientes** lista, Clientes elemento)
 {
 	Clientes* new_node = (Clientes*)malloc(sizeof(Clientes));
 	if (new_node == NULL) Security_Error("linked_list.c//LinkedList_AppendHaed_Clientes//new_node");
+
+	if (*lista == NULL)
+	{
+		*new_node = elemento;
+	}
+	else
+	{
+		*new_node = elemento;
+		new_node->next = *lista;
+
+		(*lista)->prev = new_node;
+	}
+	(*lista) = new_node;
+}
+
+/* Adiciona uma struct à "head" da lista-ligada (tipo: Contas) */
+void LinkedList_AppendHead_Contas(Contas** lista, Contas elemento)
+{
+	Contas* new_node = (Contas*)malloc(sizeof(Contas));
+	if (new_node == NULL) Security_Error("files.c//LinkedList_AppendHead_Contas//new_node");
 
 	if (*lista == NULL)
 	{
@@ -63,6 +97,29 @@ uint LinkedList_RemoveNode_Clientes(Clientes** lista, Contas** cnts, uint id)
 	return 1;
 }
 
+/* Retira uma "node" de uma dada lista-ligada (tipo: Contas) */
+uint LinkedList_RemoveNode_Contas(Contas** lista, uint id)
+{
+	Contas* aux = LinkedList_BinarySearch_Contas(*lista, id);
+
+	if (aux == NULL) return 0;
+
+	if (aux->prev != NULL)
+	{
+		aux->prev->next = aux->next;
+	}
+	else /* estamos a tratar da cabeça da linked list */
+	{
+		*lista = aux->next;
+	}
+
+	if (aux->next != NULL)
+	{
+		aux->next->prev = aux->prev;
+	}
+	return 1;
+}
+
 /* Função apenas acessada pela LinkedList_BinarySearch_Clientes(...) */
 Clientes* LinkedList_FindMiddleNode_Clientes(Clientes* start, Clientes* end)
 {
@@ -73,6 +130,29 @@ Clientes* LinkedList_FindMiddleNode_Clientes(Clientes* start, Clientes* end)
 	/*define two pointers: slow and fast*/
 	Clientes* slow = start;
 	Clientes* fast = start->next;
+
+	while (fast != end)
+	{
+		fast = fast->next;
+		if (fast != end)
+		{
+			slow = slow->next;
+			fast = fast->next;
+		}
+	}
+
+	return slow;
+}
+
+/* Função apenas acessada pela LinkedList_BinarySearch_Contas(...) */
+Contas* LinkedList_FindMiddleNode_Contas(Contas* start, Contas* end)
+{
+	if (start == NULL)
+		return NULL;
+
+	/*define two pointers: slow and fast*/
+	Contas* slow = start;
+	Contas* fast = start->next;
 
 	while (fast != end)
 	{
@@ -115,103 +195,7 @@ Clientes* LinkedList_BinarySearch_Clientes(Clientes* listHead, uint id)
 	return NULL;
 }
 
-/* Apaga completamente a memória alocada para uma lista ligada (tipo: Clientes) */
-void LinkedList_Delete_Clientes(Clientes** head_ref)
-{
-	Clientes* current = *head_ref;
-	Clientes* next;
-
-	while (current != NULL)
-	{
-		next = current->next;
-		free(current);
-		current = next;
-	}
-
-	*head_ref = NULL;
-}
-
-
-
-/* Inicializa e Retorna uma struct do tipo Contas* */
-Contas* LinkedList_New_Contas()
-{
-	Contas* tmp = (Contas*)malloc(sizeof(Contas));
-	if (tmp == NULL) Security_Error("linked_list.c//LinkedList_New_Contas//tmp");
-
-	tmp->next = NULL;
-	tmp->prev = NULL;
-
-	return tmp;
-}
-
-/* Adiciona uma struct à "head" da lista-ligada (tipo: Contas) */
-void LinkedList_AppendHead_Contas(Contas** lista, Contas elemento)
-{
-	Contas* new_node = (Contas*)malloc(sizeof(Contas));
-	if (new_node == NULL) Security_Error("files.c//LinkedList_AppendHead_Contas//new_node");
-
-	if (*lista == NULL)
-	{
-		*new_node = elemento;
-	}
-	else
-	{
-		*new_node = elemento;
-		new_node->next = *lista;
-
-		(*lista)->prev = new_node;
-	}
-	(*lista) = new_node;
-}
-
-/* Retira uma "node" de uma dada lista-ligada (tipo: Contas) */
-uint LinkedList_RemoveNode_Contas(Contas** lista, uint id)
-{
-	Contas* aux = LinkedList_BinarySearch_Contas(*lista, id);
-
-	if (aux == NULL) return 0;
-
-	if (aux->prev != NULL)
-	{
-		aux->prev->next = aux->next;
-	}
-	else /* estamos a tratar da cabeça da linked list */
-	{
-		*lista = aux->next;
-	}
-
-	if (aux->next != NULL)
-	{
-		aux->next->prev = aux->prev;
-	}
-	return 1;
-}
-
-/* Função apenas acessada pela LinkedList_BinarySearch_Contas */
-Contas* LinkedList_FindMiddleNode_Contas(Contas* start, Contas* end)
-{
-	if (start == NULL)
-		return NULL;
-
-	/*define two pointers: slow and fast*/
-	Contas* slow = start;
-	Contas* fast = start->next;
-
-	while (fast != end)
-	{
-		fast = fast->next;
-		if (fast != end)
-		{
-			slow = slow->next;
-			fast = fast->next;
-		}
-	}
-
-	return slow;
-}
-
-/* Retorna a "node" com id igual ao argumento passado recorrendo a "binary-search" (tipo: Contas) */
+/* Retorna a "node" com id igual ao argumento passado recorrendo a pesquisa bina´ria (tipo: Contas) */
 Contas* LinkedList_BinarySearch_Contas(Contas* listHead, uint id)
 {
 	Contas* start = listHead;
@@ -237,6 +221,22 @@ Contas* LinkedList_BinarySearch_Contas(Contas* listHead, uint id)
 		end != start);
 
 	return NULL;
+}
+
+/* Apaga completamente a memória alocada para uma lista ligada (tipo: Clientes) */
+void LinkedList_Delete_Clientes(Clientes** head_ref)
+{
+	Clientes* current = *head_ref;
+	Clientes* next;
+
+	while (current != NULL)
+	{
+		next = current->next;
+		free(current);
+		current = next;
+	}
+
+	*head_ref = NULL;
 }
 
 /* Apaga completamente a memória alocada para uma lista ligada (tipo: Contas) */
@@ -286,7 +286,9 @@ uint LinkedList_ShowContas_Clientes(Clientes* cliente, Contas** cnts)
 		return 0;
 	}
 
-	/* temos de fazer isto senão as contas associadas dão um bug */
+	/* temos de fazer isto senão as contas associadas tem um bug a depositar,
+		mais especificamente, as contas_associadas resetam sempre que criarmos mais uma conta
+		(no mesmo cliente) ao depositarmos.													*/
 	char* aux = malloc(sizeof(cliente->contas_associadas));
 	strcpy(aux, cliente->contas_associadas);
 

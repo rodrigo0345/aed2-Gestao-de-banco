@@ -89,6 +89,9 @@
     <ClCompile Include="levantar.c">
       <Filter>Operacoes</Filter>
     </ClCompile>
+    <ClCompile Include="dev_tools.c">
+      <Filter>Arquivos de Origem</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="clientes.csv">

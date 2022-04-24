@@ -45,7 +45,7 @@ void* Operacoes_Levantar(Clientes** clts, Contas** cnts, uint* clts_size, uint* 
 		sprintf(new_str, "w:%.2lf$\0", montante);
 		tmp->livro_razao = malloc(sizeof(char) * 60);
 		if (tmp->livro_razao == NULL)
-			Security_Error("depositar.c//Operacoes_Depositar//tmp->livro_razao");
+			Security_Error("depositar.c//Operacoes_Levantar//tmp->livro_razao");
 		strcpy(tmp->livro_razao, new_str);
 	}
 	else

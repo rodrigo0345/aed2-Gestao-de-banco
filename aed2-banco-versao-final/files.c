@@ -4,6 +4,7 @@
 /* Carrega as listas ligadas usadas ao longo do programa recorrendo a ficheiros .csv */
 void Files_LoadMemory(Clientes** clts, Contas** cnts, uint* clts_size, uint* cnts_size)
 {
+	/* abrir o ficheiro */
 	FILE* ficheiro = fopen("clientes.csv", "r");
 	if (ficheiro == NULL)
 		Security_Error("files.c//Files_LoadMemory//clientes");
@@ -13,7 +14,10 @@ void Files_LoadMemory(Clientes** clts, Contas** cnts, uint* clts_size, uint* cnt
 	char* key;
 	Clientes* tmp = LinkedList_New_Clientes();
 
+	/* recolher o cabecalho do ficheiro .csv */
 	fgets(line, 150, ficheiro);
+
+	/* guardar as informacoes do ficheiro clientes.csv na struct "tmp" */
 	while (fgets(line, 150, ficheiro) != NULL && strcmp(line, "\n"))
 	{
 		key = strtok(line, ",");
@@ -62,8 +66,10 @@ void Files_LoadMemory(Clientes** clts, Contas** cnts, uint* clts_size, uint* cnt
 		(*clts_size)++;
 		LinkedList_AppendHead_Clientes(clts, *tmp);
 	}
+	/* libertar a memoria usada */
 	free(tmp);
 
+	/* abrir o ficheiro contas.csv */
 	FILE* ficheiro2 = fopen("contas.csv", "r");
 	if (ficheiro2 == NULL)
 		Security_Error("files.c//Files_LoadMemory//ficheiro");
@@ -72,6 +78,8 @@ void Files_LoadMemory(Clientes** clts, Contas** cnts, uint* clts_size, uint* cnt
 	uint prev_id = 0;
 
 	fgets(line, 150, ficheiro2);
+
+	/* guardar as informacoes do ficheiro contas.csv na struct "tmp" */
 	while (fgets(line, 150, ficheiro2) != NULL)
 	{
 		key = strtok(line, ",");
@@ -96,8 +104,9 @@ void Files_LoadMemory(Clientes** clts, Contas** cnts, uint* clts_size, uint* cnt
 		(*cnts_size)++;
 		LinkedList_AppendHead_Contas(cnts, *tmp2);
 	}
-	free(tmp2);
 
+	/* libertar a memoria usada */
+	free(tmp2);
 	fclose(ficheiro2);
 	fclose(ficheiro);
 }

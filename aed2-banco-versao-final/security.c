@@ -46,7 +46,7 @@ void Security_Encrypt_String(char frase[])
 	}
 }
 
-/* verifica se a string passada tem ou não numeros e carateres especiais */
+/* verifica se a string do argumento tem ou não numeros e carateres especiais */
 uint Security_CheckForDigits_String(char* string)
 {
 	int i = 0;
@@ -70,7 +70,7 @@ uint Security_CheckForDigits_String(char* string)
 	return 0;
 }
 
-/* automaticamente pede ao utilizador as credenciais de login e retorna um numero para indicar se foi bem sucedido ou não*/
+/* pede automaticamente ao utilizador as credenciais de login e retorna um numero para indicar se foi bem sucedido ou não */
 uint Security_Login(Clientes** clts, Clientes** result, char* guess, uint* id)
 {
 	char str[14];
@@ -90,22 +90,12 @@ uint Security_Login(Clientes** clts, Clientes** result, char* guess, uint* id)
 	}
 	Security_Encrypt_String(guess);
 
-	if (strlen(guess) > 6 || strlen(guess) <= 0)
-	{
-		system("cls");
-		printf("Código inválido! (Apenas são permitidos [0 -> 6] carateres)");
-		getchar();
-		return 0;
-	}
-
 	*result = LinkedList_BinarySearch_Clientes(*clts, *id);
 
 	if (result == NULL)
 	{
 		printf("Cliente não encontrado!");
 		getchar();
-		free(*result);
-		*result = NULL;
 		return 0;
 	}
 	if (strcmp(guess, (*result)->pin))
@@ -119,28 +109,22 @@ uint Security_Login(Clientes** clts, Clientes** result, char* guess, uint* id)
 	return 1;
 }
 
-/* trata dos argumentos do cmd e retorna 1 caso Dev tools estejam ativadas ou 0 caso contrário */
-uint Security_Flags(char* argv[])
+/* trata dos argumentos do cmd sendo o mais importante o comando --dev */
+void Security_Flags(char* argv[])
 {
-	if (argv[1] == "--help")
+	if (argv[1] == NULL) return;
+	if (!strcmp(argv[1],"--dev"))
 	{
-		printf("Bem-vindo à nossa app do Banco!\n---Comandos disponíveis---\n");
-		printf("Dev-Tools:\t\"--dev\"");
-		getchar();
-		exit(-1);
+		DevTools_Options();
 	}
-	else if (argv[1] == "--dev")
-	{
-		return 1;
-	}
-
-	return 0;
 }
 
 /* Cria um ficheiro .txt para guardar o livro-razão de uma conta */
 void Security_FileLivroRazao(Contas* curr)
 {
 	char filename[20];
+
+	/* armazenamos o nome do ficheiro a ser criado em "filename" */
 	sprintf(filename, "%s[%d].txt", "Livro-Razao", curr->id);
 	printf("Localização do ficheiro: %s", filename);
 

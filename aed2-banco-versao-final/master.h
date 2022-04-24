@@ -85,7 +85,7 @@ void Security_Encrypt_String(char frase[]);
 uint Security_Login(Clientes** clts, Clientes** result, char* guess, uint* id);
 
 /* Ferramenta de debugging acessada pelo terminal */
-uint Security_Flags(char* argv[]);
+void Security_Flags(char* argv[]);
 
 /* Guarda o livro razão de uma conta num ficheiro .txt */
 void Security_FileLivroRazao(Contas* curr);
@@ -101,3 +101,5 @@ void dialogo(int id);
 
 /* Garante que a data introduzida pelo utilizador e´ maior que o ano 1800 e que de facto e´ valida */
 unsigned short Time_CheckInputDate_Int(int Day, int Month, int Year);
+
+void DevTools_Options();

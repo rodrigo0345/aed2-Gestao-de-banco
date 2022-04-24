@@ -14,7 +14,7 @@
 #include "methods.h"
 
 /*
-	Naming conventions used for methods:
+	Convencao usada para os metodos:
 	Filename_Job_Type(...);
 */
 void Main_MainLoop(Clientes**, Contas**, uint*, uint*);
@@ -22,7 +22,7 @@ void Main_MainLoop(Clientes**, Contas**, uint*, uint*);
 int main(int argc, char* argv[])
 {
 	/* comandos opcionais acessíveis através do terminal */
-	uint dev_tools = Security_Flags(argv);
+	Security_Flags(argv);
 
 	/* clts é a nossa abreviação de clientes */
 	Clientes* clts = NULL;
