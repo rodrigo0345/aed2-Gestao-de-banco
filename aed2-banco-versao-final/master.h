@@ -103,3 +103,6 @@ void dialogo(int id);
 unsigned short Time_CheckInputDate_Int(int Day, int Month, int Year);
 
 void DevTools_Options();
+
+void Files_LoadMemory(Clientes** clts, Contas** cnts, uint* clts_size, uint* cnts_size);
+void Files_SaveMemory(Clientes** clts, Contas** cnts);

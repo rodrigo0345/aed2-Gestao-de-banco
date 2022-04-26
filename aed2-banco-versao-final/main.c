@@ -44,6 +44,8 @@ int main(int argc, char* argv[])
 	system("cls");
 	system("pause");
 
+	Files_SaveMemory(&clts, &cnts);
+
 	Security_ProgramExit_Global(clts, cnts);
 }
 void Main_MainLoop(Clientes** clts, Contas** cnts, uint* clts_size, uint* cnts_size)

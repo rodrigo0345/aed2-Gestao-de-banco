@@ -111,3 +111,33 @@ void Files_LoadMemory(Clientes** clts, Contas** cnts, uint* clts_size, uint* cnt
 	fclose(ficheiro);
 }
 
+void Files_SaveMemory(Clientes** clts, Contas** cnts)
+{
+	FILE* clientes = fopen("clientes.csv", "w");
+
+	//id,palavra-passe,nome,data de nascimento,morada,saldo global,contas
+	Clientes* curr;
+
+	fprintf(clientes, "%s\n", "id,palavra-passe,nome,data de nascimento,morada,saldo global,contas");
+
+	for (curr = *clts; curr != NULL; curr = curr->next)
+	{
+
+		fprintf(clientes, "%d,%s,%s,%s,%s,%.2lf,%s\n", curr->id, curr->pin, curr->nome, 
+												curr->data, curr->morada, curr->saldo_global, 
+												curr->contas_associadas);
+	}
+	fclose(clientes);
+
+	FILE* as_contas = fopen("contas.csv", "w");
+
+	fprintf(as_contas, "%s\n", "ID,Id do proprietário,ordem ou prazo,saldo,livro-razão");
+
+	Contas* tmp;
+	for (tmp = *cnts; tmp != NULL; tmp = tmp->next)
+	{
+		fprintf(as_contas, "%d,%d,%d,%.2lf,%s\n", tmp->id, tmp->id_owner, tmp->tipo, tmp->saldo, tmp->livro_razao);
+	}
+	fclose(as_contas);
+}
+
