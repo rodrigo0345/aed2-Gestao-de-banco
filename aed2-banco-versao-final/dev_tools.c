@@ -60,6 +60,6 @@ void DevTools_Options()
 	scanf("%d", &opcao);
 	fflush(stdin);
 	
-	(opcao > 6 && opcao < 0) ? return: DevTools_Generate(CONST * pow(10, opcao));
+	(opcao > 6 || opcao < 0) ? return: DevTools_Generate(CONST * pow(10, opcao));
 	
 }
