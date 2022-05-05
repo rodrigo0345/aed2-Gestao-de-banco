@@ -30,7 +30,7 @@ Contas* LinkedList_New_Contas()
 	return tmp;
 }
 
-/* Adiciona uma struct à "head" da lista-ligada (tipo: Clientes) */
+/* Adiciona uma struct Ã  "head" da lista-ligada (tipo: Clientes) */
 void LinkedList_AppendHead_Clientes(Clientes** lista, Clientes elemento)
 {
 	Clientes* new_node = (Clientes*)malloc(sizeof(Clientes));
@@ -50,7 +50,7 @@ void LinkedList_AppendHead_Clientes(Clientes** lista, Clientes elemento)
 	(*lista) = new_node;
 }
 
-/* Adiciona uma struct à "head" da lista-ligada (tipo: Contas) */
+/* Adiciona uma struct Ã  "head" da lista-ligada (tipo: Contas) */
 void LinkedList_AppendHead_Contas(Contas** lista, Contas elemento)
 {
 	Contas* new_node = (Contas*)malloc(sizeof(Contas));
@@ -81,7 +81,7 @@ uint LinkedList_RemoveNode_Clientes(Clientes** lista, Contas** cnts, uint id)
 	{
 		aux->prev->next = aux->next;
 	}
-	else /* estamos a tratar da cabeça da linked list */
+	else /* estamos a tratar da cabeÃ§a da linked list */
 	{
 		*lista = aux->next;
 	}
@@ -90,9 +90,11 @@ uint LinkedList_RemoveNode_Clientes(Clientes** lista, Contas** cnts, uint id)
 	{
 		aux->next->prev = aux->prev;
 	}
-
+	
 	/* apaga todas as contas associadas ao cliente */
 	LinkedList_RemCAC_Clientes(aux, cnts);
+	
+	free(aux);
 
 	return 1;
 }
@@ -108,7 +110,7 @@ uint LinkedList_RemoveNode_Contas(Contas** lista, uint id)
 	{
 		aux->prev->next = aux->next;
 	}
-	else /* estamos a tratar da cabeça da linked list */
+	else /* estamos a tratar da cabeÃ§a da linked list */
 	{
 		*lista = aux->next;
 	}
@@ -117,10 +119,12 @@ uint LinkedList_RemoveNode_Contas(Contas** lista, uint id)
 	{
 		aux->next->prev = aux->prev;
 	}
+	
+	free(aux);
 	return 1;
 }
 
-/* Função apenas acessada pela LinkedList_BinarySearch_Clientes(...) */
+/* FunÃ§Ã£o apenas acessada pela LinkedList_BinarySearch_Clientes(...) */
 Clientes* LinkedList_FindMiddleNode_Clientes(Clientes* start, Clientes* end)
 {
 
@@ -144,7 +148,7 @@ Clientes* LinkedList_FindMiddleNode_Clientes(Clientes* start, Clientes* end)
 	return slow;
 }
 
-/* Função apenas acessada pela LinkedList_BinarySearch_Contas(...) */
+/* FunÃ§Ã£o apenas acessada pela LinkedList_BinarySearch_Contas(...) */
 Contas* LinkedList_FindMiddleNode_Contas(Contas* start, Contas* end)
 {
 	if (start == NULL)
@@ -167,7 +171,7 @@ Contas* LinkedList_FindMiddleNode_Contas(Contas* start, Contas* end)
 	return slow;
 }
 
-/* Retorna a "node" com id igual ao argumento passado recorrendo a pesquisa bina´ria (tipo: Clientes) */
+/* Retorna a "node" com id igual ao argumento passado recorrendo a pesquisa binaÂ´ria (tipo: Clientes) */
 Clientes* LinkedList_BinarySearch_Clientes(Clientes* listHead, uint id)
 {
 	Clientes* start = listHead;
@@ -195,7 +199,7 @@ Clientes* LinkedList_BinarySearch_Clientes(Clientes* listHead, uint id)
 	return NULL;
 }
 
-/* Retorna a "node" com id igual ao argumento passado recorrendo a pesquisa bina´ria (tipo: Contas) */
+/* Retorna a "node" com id igual ao argumento passado recorrendo a pesquisa binaÂ´ria (tipo: Contas) */
 Contas* LinkedList_BinarySearch_Contas(Contas* listHead, uint id)
 {
 	Contas* start = listHead;
@@ -223,7 +227,7 @@ Contas* LinkedList_BinarySearch_Contas(Contas* listHead, uint id)
 	return NULL;
 }
 
-/* Apaga completamente a memória alocada para uma lista ligada (tipo: Clientes) */
+/* Apaga completamente a memÃ³ria alocada para uma lista ligada (tipo: Clientes) */
 void LinkedList_Delete_Clientes(Clientes** head_ref)
 {
 	Clientes* current = *head_ref;
@@ -239,7 +243,7 @@ void LinkedList_Delete_Clientes(Clientes** head_ref)
 	*head_ref = NULL;
 }
 
-/* Apaga completamente a memória alocada para uma lista ligada (tipo: Contas) */
+/* Apaga completamente a memÃ³ria alocada para uma lista ligada (tipo: Contas) */
 void LinkedList_Delete_Contas(Contas** head_ref)
 {
 	/* deref head_ref to get the real head */
@@ -281,12 +285,12 @@ uint LinkedList_ShowContas_Clientes(Clientes* cliente, Contas** cnts)
 {
 	if (cliente->contas_associadas == NULL)
 	{
-		printf("Não existem contas associadas a este cliente!");
+		printf("NÃ£o existem contas associadas a este cliente!");
 		getchar();
 		return 0;
 	}
 
-	/* temos de fazer isto senão as contas associadas tem um bug a depositar,
+	/* temos de fazer isto senÃ£o as contas associadas tem um bug a depositar,
 		mais especificamente, as contas_associadas resetam sempre que criarmos mais uma conta
 		(no mesmo cliente) ao depositarmos.													*/
 	char* aux = malloc(sizeof(cliente->contas_associadas));
@@ -298,7 +302,7 @@ uint LinkedList_ShowContas_Clientes(Clientes* cliente, Contas** cnts)
 		uint id = atoi(key);
 
 		/*  tmp pode ser NULL porque sempre que apagamos uma conta,
-			não apagamos o seu registo do cliente					*/
+			nÃ£o apagamos o seu registo do cliente					*/
 		Contas* tmp = LinkedList_BinarySearch_Contas(*cnts, id);
 
 		if (tmp == NULL)
@@ -333,7 +337,7 @@ uint LinkedList_RemoveAlreadyKnownNode_Contas(Contas** lista, Contas** known_nod
 	{
 		aux->prev->next = aux->next;
 	}
-	else /* estamos a tratar da cabeça da linked list */
+	else /* estamos a tratar da cabeÃ§a da linked list */
 	{
 		*lista = aux->next;
 	}
