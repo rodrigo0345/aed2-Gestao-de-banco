@@ -9,7 +9,7 @@
 #include <locale.h>
 #include <windows.h>
 #include <conio.h>
-#include <crtdbg.h> /* usado para detetar memory leaks */
+#include <crtdbg.h> /* usado para detetar memory leaks no visual studio 2022 */
 #include "master.h"
 #include "structs.h"
 
@@ -39,9 +39,6 @@ uint LinkedList_ShowContas_Clientes(Clientes* cliente, Contas** cnts);
 
 /* (RemCAC = Remove Contas Associadas ao Cliente) Responsavel por eliminar todas as contas que pertencam a um dado cliente */
 void LinkedList_RemCAC_Clientes(Clientes* cliente_removido, Contas** cnts);
-
-/* insere uma node no fim da lista ligada */
-void LinkedList_insertEnd_Clientes(Clientes** lista, Clientes* elemento);
 
 void LinkedList_Reverse_Cliente(Clientes** head_ref);
 

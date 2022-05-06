@@ -235,6 +235,13 @@ void LinkedList_Delete_Clientes(Clientes** head_ref)
 	while (current != NULL)
 	{
 		next = current->next;
+
+		free(current->contas_associadas);
+		free(current->data);
+		free(current->morada);
+		free(current->nome);
+		free(current->pin);
+
 		free(current);
 		current = next;
 	}
@@ -262,6 +269,7 @@ void LinkedList_Delete_Contas(Contas** head_ref)
 	*head_ref = NULL;
 }
 
+/* usado antes de guardar as listas ligadas nos ficheiros .csv */
 void LinkedList_Reverse_Cliente(Clientes** head_ref)
 {
 	Clientes* prev = NULL;
@@ -281,6 +289,7 @@ void LinkedList_Reverse_Cliente(Clientes** head_ref)
 	*head_ref = prev;
 }
 
+/* usado antes de guardar as listas ligadas nos ficheiros .csv */
 void LinkedList_Reverse_Conta(Contas** head_ref)
 {
 	Contas* prev = NULL;
@@ -298,22 +307,6 @@ void LinkedList_Reverse_Conta(Contas** head_ref)
 		current = next;
 	}
 	*head_ref = prev;
-}
-
-void LinkedList_insertEnd_Clientes(Clientes** lista, Clientes* elemento) {
-	Clientes* aux;
-	aux = *lista;
-	if (*lista == NULL) {
-		*lista = elemento;
-	}
-	else {
-		/* Percorre a lista até encontrar o último elemento */
-		while (aux->next != NULL) {
-			aux = aux->next;
-		}
-		aux->next = elemento;
-		elemento->prev = aux;
-	}
 }
 
 /* Apaga todas as contas associadas a um certo cliente (CAC = Contas Associadas ao Cliente)*/
