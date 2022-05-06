@@ -50,8 +50,9 @@ int main(int argc, char* argv[])
 }
 void Main_MainLoop(Clientes** clts, Contas** cnts, uint* clts_size, uint* cnts_size)
 {
-	setlocale(LC_ALL, "portuguese");
-
+	char* check = setlocale(LC_ALL, "portuguese");
+	if (check == NULL) perror("SetLocale error: ");
+	
 	uint opcao = 0;
 	introducao();
 	do

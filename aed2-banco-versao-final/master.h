@@ -102,6 +102,9 @@ void dialogo(int id);
 /* Garante que a data introduzida pelo utilizador e´ maior que o ano 1800 e que de facto e´ valida */
 unsigned short Time_CheckInputDate_Int(int Day, int Month, int Year);
 
+/* Retorna a data atual em formato string */
+char* time_str();
+
 void DevTools_Options();
 
 void Files_LoadMemory(Clientes** clts, Contas** cnts, uint* clts_size, uint* cnts_size);

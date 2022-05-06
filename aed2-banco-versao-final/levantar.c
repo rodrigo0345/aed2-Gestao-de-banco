@@ -38,11 +38,12 @@ void* Operacoes_Levantar(Clientes** clts, Contas** cnts, uint* clts_size, uint* 
 	result->saldo_global -= montante;
 
 	/* guardar depósito no livro-razão */
-	char new_str[30];
+	const uint tam = strlen(tmp->livro_razao) + 40;
 
+	char* new_str = (char*)malloc(sizeof(char) * tam);
 	if (tmp->livro_razao == NULL || tmp->livro_razao == "")
 	{
-		sprintf(new_str, "w:%.2lf$\0", montante);
+		sprintf(new_str, "w:[v:%.2lf$ data:(%s)]\0", montante, time_str());
 		tmp->livro_razao = malloc(sizeof(char) * 60);
 		if (tmp->livro_razao == NULL)
 			Security_Error("depositar.c//Operacoes_Levantar//tmp->livro_razao");
@@ -50,9 +51,13 @@ void* Operacoes_Levantar(Clientes** clts, Contas** cnts, uint* clts_size, uint* 
 	}
 	else
 	{
-		sprintf(new_str, "%s w:%.2lf$\0", tmp->livro_razao, montante);
+		sprintf(new_str, "%s;w:[v:%.2lf$ data:(%s)]\0", tmp->livro_razao, montante, time_str());
 		strcpy(tmp->livro_razao, new_str);
 	}
 	printf("\nLevantamento concluído!\n");
+
+	new_str = NULL;
+	free(new_str);
+
 	getchar();
 }

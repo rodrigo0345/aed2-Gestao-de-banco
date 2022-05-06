@@ -134,11 +134,11 @@ void Security_FileLivroRazao(Contas* curr)
 	if (open == NULL)
 		Security_Error("security.c//Security_FileLivroRazao//open (não foi possivel abrir o ficheiro)");
 
-	char* key = strtok(curr->livro_razao, " ");
+	char* key = strtok(curr->livro_razao, ";");
 	while (key != NULL)
 	{
 		fprintf(open, "%s\n", key);
-		key = strtok(NULL, " ");
+		key = strtok(NULL, ";");
 	}
 
 	fclose(open);

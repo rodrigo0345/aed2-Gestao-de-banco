@@ -5,8 +5,9 @@
 void DevTools_Generate(long number)
 {
 	FILE* clientes = fopen("clientes.csv", "w"); FILE* contas = fopen("contas.csv", "w");
-	char header_clientes[] = "id,palavra-passe,nome,data de nascimento,morada,saldo global,contas";
-	char header_contas[] = "ID,Id do proprietário,ordem ou prazo,saldo,livro-razão";
+
+	char header_clientes[] = "id;palavra-passe;nome;data de nascimento;morada;saldo global;contas";
+	char header_contas[] = "ID;Id do proprietário;ordem ou prazo;saldo;livro-razão";
 
 	fprintf(clientes, "%s\n", header_clientes);
 	fprintf(contas, "%s\n", header_contas);
@@ -36,9 +37,9 @@ void DevTools_Generate(long number)
 
 		sprintf(contas_associadas, "%d", i);
 
-		fprintf(clientes, "%d,%s,%s,%s,%s,%.2f,%s\n", i, name, pswd, date, morada, saldo, contas_associadas);
+		fprintf(clientes, "%d;%s;%s;%s;%s;%.2f;%s\n", i, name, pswd, date, morada, saldo, contas_associadas);
 
-		fprintf(contas, "%d,%d,%s,%.2f,%s\n", i, i, "Ordem", saldo, "d:50000");
+		fprintf(contas, "%d;%d;%s;%.2f;%s\n", i, i, "Ordem", saldo, "d:50000");
 	}
 
 	fclose(clientes);
@@ -60,6 +61,6 @@ void DevTools_Options()
 	scanf("%d", &opcao);
 	fflush(stdin);
 	
-	(opcao > 6 || opcao < 0) ? return: DevTools_Generate(CONST * pow(10, opcao));
+	(opcao > 6 || opcao < 0) ? 0: DevTools_Generate(CONST * pow(10, opcao));
 	
 }

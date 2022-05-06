@@ -16,6 +16,16 @@ unsigned short Time_CheckInputDate_Int(int Day,
 	return 0;
 }
 
+/* retorna a data em formato de string */
+char* time_str()
+{
+	time_t mytime = time(NULL);
+	char* time_str = malloc(sizeof(char) * 20);
+	time_str = ctime(&mytime);
+	time_str[strlen(time_str) - 1] = '\0';
+	return time_str;
+}
+
 enum MonthList
 {
 	January = 1, February, March,

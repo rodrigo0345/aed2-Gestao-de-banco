@@ -1,2 +1,2 @@
-id,palavra-passe,nome,data de nascimento,morada,saldo global,contas
-0,0369<@,Rodrigo,22/6/2000,Barcelos,0,00,(null)
+id;palavra-passe;nome;data de nascimento;morada;saldo global;contas
+0;0369<@;Rodrigo;22/3/2000;Barcelos;20,34;0
