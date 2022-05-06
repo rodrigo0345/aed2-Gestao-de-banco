@@ -59,7 +59,7 @@ void Files_LoadMemory(Clientes** clts, Contas** cnts, uint* clts_size, uint* cnt
 		tmp->contas_associadas = malloc(sizeof(char) * 70);
 		if (tmp->contas_associadas == NULL)
 			Security_Error("files.c//Files_LoadMemory//tmp->contas_associadas");
-		strcat(key, "\0");
+		key[strlen(key) - 1] = '\0';  /* retira o \n do final da string para facilitar a manipulação de dados */
 		if (atoi(key) == 0) tmp->contas_associadas = NULL;
 		else
 			strcpy(tmp->contas_associadas, key);
@@ -101,7 +101,7 @@ void Files_LoadMemory(Clientes** clts, Contas** cnts, uint* clts_size, uint* cnt
 		tmp2->livro_razao = (char*)malloc(sizeof(char) * 150);
 		if (tmp2->livro_razao == NULL)
 			Security_Error("files.c//Files_LoadMemory//tmp2->livro_razao");
-		strcat(key, "\0");
+		key[strlen(key) - 1] = '\0'; /* retira o \n do final da string para facilitar a manipulação de dados */
 		strcpy(tmp2->livro_razao, key);
 
 		(*cnts_size)++;
@@ -131,7 +131,7 @@ void Files_SaveMemory(Clientes** clts, Contas** cnts)
 
 	for (curr = *clts; curr != NULL; curr = curr->next)
 	{
-		fprintf(clientes, "%d;%s;%s;%s;%s;%.2lf;%70s\n", curr->id, curr->pin, curr->nome, 
+		fprintf(clientes, "%d;%s;%s;%s;%s;%.2lf;%s\n", curr->id, curr->pin, curr->nome, 
 												curr->data, curr->morada, curr->saldo_global, 
 												curr->contas_associadas);
 	}
@@ -144,7 +144,7 @@ void Files_SaveMemory(Clientes** clts, Contas** cnts)
 	Contas* tmp;
 	for (tmp = *cnts; tmp != NULL; tmp = tmp->next)
 	{
-		fprintf(as_contas, "%d;%d;%d;%.2lf;%150s\n", tmp->id, tmp->id_owner, tmp->tipo, tmp->saldo, tmp->livro_razao);
+		fprintf(as_contas, "%d;%d;%d;%.2lf;%s\n", tmp->id, tmp->id_owner, tmp->tipo, tmp->saldo, tmp->livro_razao);
 	}
 	fclose(as_contas);
 }

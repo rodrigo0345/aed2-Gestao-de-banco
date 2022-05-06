@@ -12,7 +12,7 @@ typedef struct Cliente {
 	char* nome;
 	char* data;
 	char* morada;
-	char* contas_associadas;
+	char* contas_associadas; /* 70 carateres */
 	double saldo_global;
 
 	struct Cliente* next;
@@ -26,7 +26,7 @@ typedef struct Conta {
 	/* 0 = Ordem, 1 = Prazo */
 	short tipo;
 	double saldo;
-	char* livro_razao;
+	char* livro_razao; /* 150 carateres */
 
 	struct Conta* next;
 	struct Conta* prev;
