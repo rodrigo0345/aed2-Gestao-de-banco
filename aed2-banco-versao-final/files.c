@@ -9,13 +9,13 @@ void Files_LoadMemory(Clientes** clts, Contas** cnts, uint* clts_size, uint* cnt
 	if (ficheiro == NULL)
 		Security_Error("files.c//Files_LoadMemory//clientes");
 
-	char line[200];
+	char line[250];
 	int i = 0;
 	char* key;
 	Clientes* tmp = LinkedList_New_Clientes();
 
 	/* recolher o cabecalho do ficheiro .csv */
-	fgets(line, 200, ficheiro);
+	fgets(line, 250, ficheiro);
 
 	/* guardar as informacoes do ficheiro clientes.csv na struct "tmp" */
 	while (fgets(line, 200, ficheiro) != NULL && strcmp(line, "\n"))
@@ -59,10 +59,13 @@ void Files_LoadMemory(Clientes** clts, Contas** cnts, uint* clts_size, uint* cnt
 		tmp->contas_associadas = malloc(sizeof(char) * 70);
 		if (tmp->contas_associadas == NULL)
 			Security_Error("files.c//Files_LoadMemory//tmp->contas_associadas");
-		key[strlen(key) - 1] = '\0';  /* retira o \n do final da string para facilitar a manipulação de dados */
 		if (atoi(key) == 0) tmp->contas_associadas = NULL;
 		else
+		{
+			key[strlen(key) - 1] = '\0';  /* retira o \n do final da string para facilitar a manipulação de dados */
 			strcpy(tmp->contas_associadas, key);
+		}
+			
 
 		(*clts_size)++;
 		LinkedList_AppendHead_Clientes(clts, *tmp);
@@ -78,10 +81,10 @@ void Files_LoadMemory(Clientes** clts, Contas** cnts, uint* clts_size, uint* cnt
 	Contas* tmp2 = LinkedList_New_Contas();
 	uint prev_id = 0;
 
-	fgets(line, 200, ficheiro2);
+	fgets(line, 250, ficheiro2);
 
 	/* guardar as informacoes do ficheiro contas.csv na struct "tmp" */
-	while (fgets(line, 200, ficheiro2) != NULL && strcmp(line, " \n"))
+	while (fgets(line, 200, ficheiro2) != NULL && strcmp(line, "\n"))
 	{
 		key = strtok(line, ";");
 		tmp2->id = atoi(key);
@@ -101,7 +104,10 @@ void Files_LoadMemory(Clientes** clts, Contas** cnts, uint* clts_size, uint* cnt
 		tmp2->livro_razao = (char*)malloc(sizeof(char) * 150);
 		if (tmp2->livro_razao == NULL)
 			Security_Error("files.c//Files_LoadMemory//tmp2->livro_razao");
-		key[strlen(key) - 1] = '\0'; /* retira o \n do final da string para facilitar a manipulação de dados */
+		else
+		{
+			key[strlen(key) - 1] = '\0';  /* retira o \n do final da string para facilitar a manipulação de dados */
+		}
 		strcpy(tmp2->livro_razao, key);
 
 		(*cnts_size)++;

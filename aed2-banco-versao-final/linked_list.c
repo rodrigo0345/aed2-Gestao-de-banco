@@ -124,7 +124,7 @@ uint LinkedList_RemoveNode_Contas(Contas** lista, uint id)
 }
 
 /* Função apenas acessada pela LinkedList_BinarySearch_Clientes(...) */
-Clientes* LinkedList_FindMiddleNode_Clientes(Clientes* start, Clientes* end)
+static Clientes* LinkedList_FindMiddleNode_Clientes(Clientes* start, Clientes* end)
 {
 
 	if (start == NULL)
@@ -148,7 +148,7 @@ Clientes* LinkedList_FindMiddleNode_Clientes(Clientes* start, Clientes* end)
 }
 
 /* Função apenas acessada pela LinkedList_BinarySearch_Contas(...) */
-Contas* LinkedList_FindMiddleNode_Contas(Contas* start, Contas* end)
+static Contas* LinkedList_FindMiddleNode_Contas(Contas* start, Contas* end)
 {
 	if (start == NULL)
 		return NULL;

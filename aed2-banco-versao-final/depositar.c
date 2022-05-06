@@ -40,7 +40,7 @@ void* Operacoes_Depositar(Clientes** clts, Contas** cnts, uint* clts_size, uint*
 	/* guardar depósito no livro-razão */
 	if (tmp->livro_razao >= sizeof(char) * 150)
 	{
-		LOG("Ledger cheio, por favor vá a consultar cliente e esvazie o seu ledger atual");
+		LOG_WARNING("Ledger cheio, por favor vá a consultar cliente e esvazie o seu ledger atual");
 		return NULL;
 	}
 

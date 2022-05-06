@@ -38,13 +38,18 @@ void* Operacoes_Levantar(Clientes** clts, Contas** cnts, uint* clts_size, uint* 
 	result->saldo_global -= montante;
 
 	/* guardar depósito no livro-razão */
-	const uint tam = strlen(tmp->livro_razao) + 40;
+	if (tmp->livro_razao >= sizeof(char) * 149)
+	{
+		LOG_WARNING("Ledger cheio, por favor vá a consultar cliente e esvazie o seu ledger atual");
+		int check = getchar();
+		return NULL;
+	}
 
-	char* new_str = (char*)malloc(sizeof(char) * tam);
+	char* new_str = (char*)malloc(sizeof(char) * 150);
 	if (tmp->livro_razao == NULL || tmp->livro_razao == "")
 	{
 		sprintf(new_str, "w:[v:%.2lf$ data:(%s)]\0", montante, time_str());
-		tmp->livro_razao = malloc(sizeof(char) * 60);
+		tmp->livro_razao = malloc(sizeof(char) * 150);
 		if (tmp->livro_razao == NULL)
 			Security_Error("depositar.c//Operacoes_Levantar//tmp->livro_razao");
 		strcpy(tmp->livro_razao, new_str);

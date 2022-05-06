@@ -13,7 +13,7 @@
 #include "master.h"
 #include "structs.h"
 
-#define LOG(msg) printf("\nError: %s\n", msg);
+#define LOG_WARNING(msg) printf("\nAviso: %s\n", msg);
 
 /* --- Clientes --- */
 

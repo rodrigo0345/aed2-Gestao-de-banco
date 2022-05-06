@@ -6,9 +6,10 @@ void* Criar_Contas(Clientes** clts, Contas** cnts, uint* clts_size, uint* cnts_s
 	/* login necessário para criar conta */
 	char guess[40]; uint id; Clientes* result;
 	if (!Security_Login(clts, &result, guess, &id)) return NULL;
-	if (sizeof(result->contas_associadas) >= sizeof(char) * 35)
+	if (sizeof(result->contas_associadas) >= sizeof(char) * 69)
 	{
-		LOG("Atingiu o numero máximo de contas associadas! Por favor diriga-se a um dos nossos balcões.");
+		LOG_WARNING("Atingiu o numero máximo de contas associadas! Por favor diriga-se a um dos nossos balcões.");
+		int check = getchar();
 		return NULL;
 	}
 
@@ -39,7 +40,7 @@ void* Criar_Contas(Clientes** clts, Contas** cnts, uint* clts_size, uint* cnts_s
 	tmp->livro_razao = "";
 	tmp->saldo = 0;
 
-	char new_str[70 + 1];
+	char* new_str = (char*)malloc(sizeof(char) * (70 + 1));
 
 	if (result->contas_associadas == NULL || result->contas_associadas == "")
 	{
@@ -59,5 +60,7 @@ void* Criar_Contas(Clientes** clts, Contas** cnts, uint* clts_size, uint* cnts_s
 	LinkedList_AppendHead_Contas(cnts, *tmp);
 
 	printf("\nConta criada com sucesso!");
+	free(new_str);
+
 	return 0;
 }
