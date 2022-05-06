@@ -17,7 +17,7 @@ void* Remover_Contas(Clientes** clts, Contas** cnts, uint* clts_size, uint* cnts
 	if (aux == NULL)
 	{
 		printf("\nA conta que escolheu não existe!");
-		getchar();
+		int check = getchar();
 		return -1;
 	}
 

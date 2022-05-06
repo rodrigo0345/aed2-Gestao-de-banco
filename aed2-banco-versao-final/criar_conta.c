@@ -18,7 +18,7 @@ void* Criar_Contas(Clientes** clts, Contas** cnts, uint* clts_size, uint* cnts_s
 	if (!Security_Validation_UInt(opcao, 2))
 	{
 		printf("Opção inválida!");
-		getch();
+		int check = getch();
 		return -1;
 	}
 	if (opcao == 1)
@@ -54,4 +54,5 @@ void* Criar_Contas(Clientes** clts, Contas** cnts, uint* clts_size, uint* cnts_s
 	LinkedList_AppendHead_Contas(cnts, *tmp);
 
 	printf("\nConta criada com sucesso!");
+	return 0;
 }

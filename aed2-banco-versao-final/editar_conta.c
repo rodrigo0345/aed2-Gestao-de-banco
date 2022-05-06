@@ -17,7 +17,7 @@ void* Editar_Contas(Clientes** clts, Contas** cnts, uint* clts_size, uint* cnts_
 	if (tmp == NULL || result->id != tmp->id_owner)
 	{
 		printf("\nO id que escolheu não existe");
-		getchar();
+		int check = getchar();
 		return -1;
 	}
 
@@ -54,11 +54,11 @@ void* Editar_Contas(Clientes** clts, Contas** cnts, uint* clts_size, uint* cnts_
 	else
 	{
 		printf("\nOpção inválida!");
-		getchar();
+		int check = getchar();
 		return -1;
 	}
 
 	printf("\nOpções alteradas com sucesso!");
-	getchar();
+	int check = getchar();
 	return 0;
 }

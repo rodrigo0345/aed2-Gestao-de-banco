@@ -49,7 +49,7 @@ void Security_Encrypt_String(char frase[])
 /* verifica se a string do argumento tem ou não numeros e carateres especiais */
 uint Security_CheckForDigits_String(char* string)
 {
-	int i = 0;
+	size_t i = 0;
 	for (i = 0; i < strlen(string); i++)
 	{
 		if (isdigit(string[i]))
@@ -85,7 +85,7 @@ uint Security_Login(Clientes** clts, Clientes** result, char* guess, uint* id)
 	{
 		system("cls");
 		printf("Código inválido! (Apenas são permitidos [0 -> 6] carateres)");
-		getchar();
+		int check = getchar();
 		return 0;
 	}
 	Security_Encrypt_String(guess);
@@ -95,7 +95,7 @@ uint Security_Login(Clientes** clts, Clientes** result, char* guess, uint* id)
 	if (*result == NULL)
 	{
 		printf("Cliente não encontrado!");
-		getchar();
+		int check = getchar();
 		return 0;
 	}
 
@@ -103,7 +103,7 @@ uint Security_Login(Clientes** clts, Clientes** result, char* guess, uint* id)
 	if (strcmp(guess, (*result)->pin))
 	{
 		printf("PIN incorreto!");
-		getchar();
+		int check = getchar();
 		free(*result);
 		*result = NULL;
 		return 0;
@@ -144,5 +144,17 @@ void Security_FileLivroRazao(Contas* curr)
 	fclose(open);
 
 	printf("\nFicheiro criado com sucesso!");
-	getchar();
+	int check = getchar();
+}
+
+void replace(char* s, char ch, char repl) {
+	uint i = 0;
+	while (s[i] != '\0')
+	{
+		if (s[i] == ch)
+		{
+			s[i] = repl;
+		}
+		i++;
+	}
 }

@@ -20,7 +20,10 @@ unsigned short Time_CheckInputDate_Int(int Day,
 char* time_str()
 {
 	time_t mytime = time(NULL);
+
+	/* memory leak here! */
 	char* time_str = malloc(sizeof(char) * 20);
+
 	time_str = ctime(&mytime);
 	time_str[strlen(time_str) - 1] = '\0';
 	return time_str;

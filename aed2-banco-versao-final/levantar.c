@@ -17,7 +17,7 @@ void* Operacoes_Levantar(Clientes** clts, Contas** cnts, uint* clts_size, uint* 
 	if (tmp == NULL || result->id != tmp->id_owner)
 	{
 		printf("\nO id que escolheu não existe");
-		getchar();
+		int check = getchar();
 		return -1;
 	}
 
@@ -27,10 +27,10 @@ void* Operacoes_Levantar(Clientes** clts, Contas** cnts, uint* clts_size, uint* 
 	montante = atof(str);
 	fflush(stdin);
 
-	if (!Security_Validation_UInt(montante, 100000000))
+	if (!Security_Validation_UInt((uint)montante, 100000000))
 	{
 		printf("\nMontante inválido!");
-		getchar();
+		int check = getchar();
 		return -1;
 	}
 
@@ -59,5 +59,6 @@ void* Operacoes_Levantar(Clientes** clts, Contas** cnts, uint* clts_size, uint* 
 	new_str = NULL;
 	free(new_str);
 
-	getchar();
+	int check = getchar();
+	return 0;
 }

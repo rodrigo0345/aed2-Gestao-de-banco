@@ -1,6 +1,6 @@
 #include <math.h>
 #include "master.h"
-#define CONST 5
+#define CONSTANTE 5
 
 void DevTools_Generate(long number)
 {
@@ -61,6 +61,6 @@ void DevTools_Options()
 	scanf("%d", &opcao);
 	fflush(stdin);
 	
-	(opcao > 6 || opcao < 0) ? 0: DevTools_Generate(CONST * pow(10, opcao));
+	(opcao > 6 || opcao < 0) ? 0: DevTools_Generate((long)CONSTANTE * pow(10, opcao));
 	
 }

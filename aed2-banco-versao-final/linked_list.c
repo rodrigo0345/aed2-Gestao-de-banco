@@ -1,7 +1,6 @@
 #include "master.h"
 #include "structs.h"
-
-
+#include <stdlib.h>
 
 /* Inicializa e Retorna uma struct do tipo Clientes* */
 Clientes* LinkedList_New_Clientes()
@@ -253,6 +252,7 @@ void LinkedList_Delete_Contas(Contas** head_ref)
 	while (current != NULL)
 	{
 		next = current->next;
+		free(current->livro_razao);
 		free(current);
 		current = next;
 	}
@@ -260,6 +260,60 @@ void LinkedList_Delete_Contas(Contas** head_ref)
 	/* deref head_ref to affect the real head back
 	   in the caller. */
 	*head_ref = NULL;
+}
+
+void LinkedList_Reverse_Cliente(Clientes** head_ref)
+{
+	Clientes* prev = NULL;
+	Clientes* current = *head_ref;
+	Clientes* next = NULL;
+	while (current != NULL) {
+		// Store next
+		next = current->next;
+
+		// Reverse current node's pointer
+		current->next = prev;
+
+		// Move pointers one position ahead.
+		prev = current;
+		current = next;
+	}
+	*head_ref = prev;
+}
+
+void LinkedList_Reverse_Conta(Contas** head_ref)
+{
+	Contas* prev = NULL;
+	Contas* current = *head_ref;
+	Contas* next = NULL;
+	while (current != NULL) {
+		// Store next
+		next = current->next;
+
+		// Reverse current node's pointer
+		current->next = prev;
+
+		// Move pointers one position ahead.
+		prev = current;
+		current = next;
+	}
+	*head_ref = prev;
+}
+
+void LinkedList_insertEnd_Clientes(Clientes** lista, Clientes* elemento) {
+	Clientes* aux;
+	aux = *lista;
+	if (*lista == NULL) {
+		*lista = elemento;
+	}
+	else {
+		/* Percorre a lista até encontrar o último elemento */
+		while (aux->next != NULL) {
+			aux = aux->next;
+		}
+		aux->next = elemento;
+		elemento->prev = aux;
+	}
 }
 
 /* Apaga todas as contas associadas a um certo cliente (CAC = Contas Associadas ao Cliente)*/
@@ -286,7 +340,7 @@ uint LinkedList_ShowContas_Clientes(Clientes* cliente, Contas** cnts)
 	if (cliente->contas_associadas == NULL)
 	{
 		printf("Não existem contas associadas a este cliente!");
-		getchar();
+		int check = getchar();
 		return 0;
 	}
 
@@ -320,10 +374,9 @@ uint LinkedList_ShowContas_Clientes(Clientes* cliente, Contas** cnts)
 			printf("ID[%u]\tsaldo[%.2lf]\ttipo[%s]\n", id, tmp->saldo, "Ordem");
 		}
 
-
-
 		key = strtok(NULL, "/");
 	}
+	free(aux);
 	return 1;
 }
 

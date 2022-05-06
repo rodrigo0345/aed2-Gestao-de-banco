@@ -52,7 +52,8 @@ void Files_LoadMemory(Clientes** clts, Contas** cnts, uint* clts_size, uint* cnt
 		strcpy(tmp->morada, key);
 
 		key = strtok(NULL, ";");
-		tmp->saldo_global = atoi(key);
+		replace(key, ',', '.');
+		tmp->saldo_global = atof(key);
 
 		key = strtok(NULL, ";");
 		tmp->contas_associadas = malloc(sizeof(char) * 60);
@@ -80,7 +81,7 @@ void Files_LoadMemory(Clientes** clts, Contas** cnts, uint* clts_size, uint* cnt
 	fgets(line, 150, ficheiro2);
 
 	/* guardar as informacoes do ficheiro contas.csv na struct "tmp" */
-	while (fgets(line, 150, ficheiro2) != NULL)
+	while (fgets(line, 150, ficheiro2) != NULL && strcmp(line, "\n"))
 	{
 		key = strtok(line, ";");
 		tmp2->id = atoi(key);
@@ -92,10 +93,12 @@ void Files_LoadMemory(Clientes** clts, Contas** cnts, uint* clts_size, uint* cnt
 		tmp2->tipo = atoi(key);
 
 		key = strtok(NULL, ";");
-		tmp2->saldo = atoi(key);
+		/* troca a virgula por um ponto de forma a conseguir fazer a conversa~o de string para float */
+		replace(key, ',', '.');
+		tmp2->saldo = atof(key);
 
 		key = strtok(NULL, ";");
-		tmp2->livro_razao = malloc(sizeof(char) * 8);
+		tmp2->livro_razao = (char*)malloc(sizeof(char) * 150);
 		if (tmp2->livro_razao == NULL)
 			Security_Error("files.c//Files_LoadMemory//tmp2->livro_razao");
 		strcat(key, "\0");
@@ -103,6 +106,8 @@ void Files_LoadMemory(Clientes** clts, Contas** cnts, uint* clts_size, uint* cnt
 
 		(*cnts_size)++;
 		LinkedList_AppendHead_Contas(cnts, *tmp2);
+
+		tmp2->livro_razao = NULL;
 	}
 
 	/* libertar a memoria usada */
@@ -113,6 +118,10 @@ void Files_LoadMemory(Clientes** clts, Contas** cnts, uint* clts_size, uint* cnt
 
 void Files_SaveMemory(Clientes** clts, Contas** cnts)
 {
+	/* temos de trocar a ordem das listas ligadas antes de as guardar */
+	LinkedList_Reverse_Cliente(clts);
+	LinkedList_Reverse_Conta(cnts);
+
 	FILE* clientes = fopen("clientes.csv", "w");
 
 	//id,palavra-passe,nome,data de nascimento,morada,saldo global,contas

@@ -28,7 +28,7 @@ void* Editar_Clientes(Clientes** clts, Contas** cnts, uint* clts_size, uint* cnt
 		{
 			system("cls");
 			printf("Nome inválido! (Apenas são permitidas letras e espaços)");
-			getchar();
+			int check = getchar();
 			free(result);
 			result = NULL;
 			return -1;
@@ -47,7 +47,7 @@ void* Editar_Clientes(Clientes** clts, Contas** cnts, uint* clts_size, uint* cnt
 		{
 			system("cls");
 			printf("Código inválido! (Apenas são permitidos [0 -> 6] carateres)");
-			getchar();
+			int check = getchar();
 			free(result);
 			result = NULL;
 			return -1;
@@ -67,7 +67,7 @@ void* Editar_Clientes(Clientes** clts, Contas** cnts, uint* clts_size, uint* cnt
 		{
 			system("cls");
 			printf("Data inválida!");
-			getchar();
+			int check = getchar();
 			free(result);
 			result = NULL;
 			return -1;
@@ -83,6 +83,6 @@ void* Editar_Clientes(Clientes** clts, Contas** cnts, uint* clts_size, uint* cnt
 		fflush(stdin);
 	}
 
-	getchar();
+	int check = getchar();
 	return 0;
 }

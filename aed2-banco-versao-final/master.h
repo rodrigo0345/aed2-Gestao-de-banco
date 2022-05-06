@@ -1,5 +1,6 @@
 #pragma once
 #pragma warning(disable:4996)
+#define _CRTDBG_MAP_ALLOC
 
 #include <stdlib.h>
 #include <stdio.h>
@@ -8,6 +9,7 @@
 #include <locale.h>
 #include <windows.h>
 #include <conio.h>
+#include <crtdbg.h> /* usado para detetar memory leaks */
 #include "master.h"
 #include "structs.h"
 
@@ -38,6 +40,11 @@ uint LinkedList_ShowContas_Clientes(Clientes* cliente, Contas** cnts);
 /* (RemCAC = Remove Contas Associadas ao Cliente) Responsavel por eliminar todas as contas que pertencam a um dado cliente */
 void LinkedList_RemCAC_Clientes(Clientes* cliente_removido, Contas** cnts);
 
+/* insere uma node no fim da lista ligada */
+void LinkedList_insertEnd_Clientes(Clientes** lista, Clientes* elemento);
+
+void LinkedList_Reverse_Cliente(Clientes** head_ref);
+
 /* --- Contas --- */
 
 /* Retorna uma nova conta com as variaveis iniciadas corretamente */
@@ -60,6 +67,8 @@ void LinkedList_Delete_Contas(Contas** head_ref);
 
 /* Metodo usado quando ja temos uma variavel a apontar para a "node" que desejamos remover */
 uint LinkedList_RemoveAlreadyKnownNode_Contas(Contas** lista, Contas** known_node);
+
+void LinkedList_Reverse_Conta(Contas** head_ref);
 
 
 /* Utilizado com fins de debugging, serve para, em caso de erro, alertar o utilizador do erro que tem pela frente
@@ -104,6 +113,9 @@ unsigned short Time_CheckInputDate_Int(int Day, int Month, int Year);
 
 /* Retorna a data atual em formato string */
 char* time_str();
+
+/* tem como input uma string e troca um carater dessa string por outra string */
+void replace(char* s, char ch, char repl);
 
 void DevTools_Options();
 

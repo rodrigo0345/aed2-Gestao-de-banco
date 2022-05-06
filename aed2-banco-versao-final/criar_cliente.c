@@ -16,7 +16,7 @@ void* Criar_Clientes(Clientes** clts, Contas** cnts, uint* clts_size, uint* cnts
 	{
 		system("cls");
 		printf("Nome inválido! (Apenas são permitidas letras e espaços)");
-		getchar();
+		int check = getchar();
 		free(novo);
 		novo = NULL;
 		return  -1;
@@ -36,7 +36,7 @@ void* Criar_Clientes(Clientes** clts, Contas** cnts, uint* clts_size, uint* cnts
 		printf("Código inválido! (Apenas são permitidos [0 -> 6] carateres)");
 		free(novo);
 		novo = NULL;
-		getchar();
+		int check = getchar();
 		return -1;
 	}
 	Security_Encrypt_String(string);
@@ -57,7 +57,7 @@ void* Criar_Clientes(Clientes** clts, Contas** cnts, uint* clts_size, uint* cnts
 		printf("Data inválida!");
 		free(novo);
 		novo = NULL;
-		getchar();
+		int check = getchar();
 		return -1;
 	}
 	sprintf(string, "%u/%u/%u", dia, mes, ano);
@@ -65,10 +65,10 @@ void* Criar_Clientes(Clientes** clts, Contas** cnts, uint* clts_size, uint* cnts
 	if (novo->data == NULL)
 		Security_Error("methods//Clientes//criar_cliente.c//Criar_Clientes//novo->data");
 	strcpy(novo->data, string);
-
+	fflush(stdin);
 
 	dialogo(6);
-	scanf_s("%[^\n]%*c", string, 50);
+	scanf_s(" %[^\n]%*c", string, 50);
 	novo->morada = (char*)malloc(strlen(string) * sizeof(char));
 	if (novo->morada == NULL)
 		Security_Error("methods//Clientes//criar_cliente.c//Criar_Clientes//novo->morada");
@@ -80,14 +80,6 @@ void* Criar_Clientes(Clientes** clts, Contas** cnts, uint* clts_size, uint* cnts
 	LinkedList_AppendHead_Clientes(clts, *novo);
 	printf("\nConta criada com sucesso!\nGuarde este código, ID -> [%u]\n", novo->id);
 	getchar();
-
-	/* liberta o espaço usado,
-		mas não conseguimos libertar o
-		espaço usado pelas variáveis
-		dentro de novo				*/
-
-	free(novo);
-	novo = NULL;
 
 	return 0;
 }

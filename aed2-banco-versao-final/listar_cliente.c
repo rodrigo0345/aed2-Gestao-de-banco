@@ -9,7 +9,7 @@ void* Listar_Clientes(Clientes** clts, Contas** cnts, uint* clts_size, uint* cnt
 	if (curr == NULL)
 	{
 		printf("Não existem clientes!");
-		getchar();
+		int check = getchar();
 		return -1;
 	}
 

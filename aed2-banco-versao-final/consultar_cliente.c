@@ -28,7 +28,7 @@ void* Consultar_Clientes(Clientes** clts, Contas** cnts, uint* clts_size, uint* 
 		{
 			SetConsoleTextAttribute(h, 6);
 			printf("[Localidade inválida] - (Apenas são permitidas letras e espaços)");
-			getchar();
+			int check = getchar();
 			return -1;
 		}
 		for (curr; curr != NULL; curr = curr->next)
@@ -71,6 +71,6 @@ void* Consultar_Clientes(Clientes** clts, Contas** cnts, uint* clts_size, uint* 
 		LinkedList_ShowContas_Clientes(result, cnts);
 	}
 
-	getchar();
+	int check = getchar();
 	return 0;
 }

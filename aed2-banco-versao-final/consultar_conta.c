@@ -18,7 +18,7 @@ void* Consultar_Contas(Clientes** clts, Contas** cnts, uint* clts_size, uint* cn
 	if (curr == NULL || result->id != curr->id_owner)
 	{
 		printf("\nO id que escolheu não existe");
-		getchar();
+		int check = getchar();
 		return -1;
 	}
 
@@ -36,7 +36,7 @@ void* Consultar_Contas(Clientes** clts, Contas** cnts, uint* clts_size, uint* cn
 		if (result->contas_associadas == NULL)
 		{
 			printf("Não existem contas associadas a este cliente!");
-			getchar();
+			int check = getchar();
 			return 0;
 		}
 
@@ -67,7 +67,7 @@ void* Consultar_Contas(Clientes** clts, Contas** cnts, uint* clts_size, uint* cn
 			key = strtok(NULL, "/");
 		}
 		printf("Posição global do cliente: ID[%d]\tSaldo à Ordem [%.2lf$]\tSaldo a Prazo[%.2lf$]", curr->id, saldo_ordem, saldo_prazo);
-		getchar();
+		int check = getchar();
 	}
 	else if (opcao == 2)
 	{
@@ -76,7 +76,7 @@ void* Consultar_Contas(Clientes** clts, Contas** cnts, uint* clts_size, uint* cn
 	else
 	{
 		printf("\nOpção inválida!");
-		getchar();
+		int check = getchar();
 		return -1;
 	}
 
