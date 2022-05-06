@@ -4,9 +4,9 @@
 void* Remover_Contas(Clientes** clts, Contas** cnts, uint* clts_size, uint* cnts_size)
 {
 	Clientes* result; char guess[30]; uint id;
-	if (!Security_Login(clts, &result, guess, &id)) return -1;
+	if (!Security_Login(clts, &result, guess, &id)) return NULL;
 
-	if (!LinkedList_ShowContas_Clientes(result, cnts)) return -1;
+	if (!LinkedList_ShowContas_Clientes(result, cnts)) return NULL;
 
 	char str[20]; uint opcao;
 	printf("\nEscolha o ID da conta que pretende eliminar: ");
@@ -18,12 +18,12 @@ void* Remover_Contas(Clientes** clts, Contas** cnts, uint* clts_size, uint* cnts
 	{
 		printf("\nA conta que escolheu não existe!");
 		int check = getchar();
-		return -1;
+		return NULL;
 	}
 
 	LinkedList_RemoveAlreadyKnownNode_Contas(cnts, &aux);
 
 	printf("\nConta removida com sucesso!");
 
-	return 0;
+	return NULL;
 }

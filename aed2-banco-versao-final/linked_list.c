@@ -373,7 +373,6 @@ uint LinkedList_ShowContas_Clientes(Clientes* cliente, Contas** cnts)
 
 		key = strtok(NULL, "/");
 	}
-	free(aux);
 	return 1;
 }
 

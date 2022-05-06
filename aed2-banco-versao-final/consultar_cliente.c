@@ -8,7 +8,7 @@ void* Consultar_Clientes(Clientes** clts, Contas** cnts, uint* clts_size, uint* 
 	char str[50];
 	int opcao = 0;
 	Security_Input_Int(str, &opcao);
-	if (!Security_Validation_UInt(opcao, 4)) return -1;
+	if (!Security_Validation_UInt(opcao, 4)) return NULL;
 
 	uint found = 0;
 	Clientes* curr = *clts;
@@ -62,7 +62,7 @@ void* Consultar_Clientes(Clientes** clts, Contas** cnts, uint* clts_size, uint* 
 		double saldo_global_prazo = 0;
 
 		char guess[20]; uint ID; Clientes* result;
-		if (!Security_Login(clts, &result, guess, &ID)) return -1;
+		if (!Security_Login(clts, &result, guess, &ID)) return NULL;
 
 		/* de forma a encontrarmos as contas associadas ao cliente
 			temos que usar a variavel das contas
@@ -72,5 +72,5 @@ void* Consultar_Clientes(Clientes** clts, Contas** cnts, uint* clts_size, uint* 
 	}
 
 	int check = getchar();
-	return 0;
+	return NULL;
 }

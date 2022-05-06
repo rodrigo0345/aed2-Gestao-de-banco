@@ -9,16 +9,16 @@ void Files_LoadMemory(Clientes** clts, Contas** cnts, uint* clts_size, uint* cnt
 	if (ficheiro == NULL)
 		Security_Error("files.c//Files_LoadMemory//clientes");
 
-	char line[150];
+	char line[200];
 	int i = 0;
 	char* key;
 	Clientes* tmp = LinkedList_New_Clientes();
 
 	/* recolher o cabecalho do ficheiro .csv */
-	fgets(line, 150, ficheiro);
+	fgets(line, 200, ficheiro);
 
 	/* guardar as informacoes do ficheiro clientes.csv na struct "tmp" */
-	while (fgets(line, 150, ficheiro) != NULL && strcmp(line, "\n"))
+	while (fgets(line, 200, ficheiro) != NULL && strcmp(line, "\n"))
 	{
 		key = strtok(line, ";");
 		tmp->id = atoi(key);
@@ -56,7 +56,7 @@ void Files_LoadMemory(Clientes** clts, Contas** cnts, uint* clts_size, uint* cnt
 		tmp->saldo_global = atof(key);
 
 		key = strtok(NULL, ";");
-		tmp->contas_associadas = malloc(sizeof(char) * 60);
+		tmp->contas_associadas = malloc(sizeof(char) * 70);
 		if (tmp->contas_associadas == NULL)
 			Security_Error("files.c//Files_LoadMemory//tmp->contas_associadas");
 		strcat(key, "\0");
@@ -78,10 +78,10 @@ void Files_LoadMemory(Clientes** clts, Contas** cnts, uint* clts_size, uint* cnt
 	Contas* tmp2 = LinkedList_New_Contas();
 	uint prev_id = 0;
 
-	fgets(line, 150, ficheiro2);
+	fgets(line, 200, ficheiro2);
 
 	/* guardar as informacoes do ficheiro contas.csv na struct "tmp" */
-	while (fgets(line, 150, ficheiro2) != NULL && strcmp(line, "\n"))
+	while (fgets(line, 200, ficheiro2) != NULL && strcmp(line, " \n"))
 	{
 		key = strtok(line, ";");
 		tmp2->id = atoi(key);
@@ -131,7 +131,7 @@ void Files_SaveMemory(Clientes** clts, Contas** cnts)
 
 	for (curr = *clts; curr != NULL; curr = curr->next)
 	{
-		fprintf(clientes, "%d;%s;%s;%s;%s;%.2lf;%s\n", curr->id, curr->pin, curr->nome, 
+		fprintf(clientes, "%d;%s;%s;%s;%s;%.2lf;%70s\n", curr->id, curr->pin, curr->nome, 
 												curr->data, curr->morada, curr->saldo_global, 
 												curr->contas_associadas);
 	}
@@ -144,7 +144,7 @@ void Files_SaveMemory(Clientes** clts, Contas** cnts)
 	Contas* tmp;
 	for (tmp = *cnts; tmp != NULL; tmp = tmp->next)
 	{
-		fprintf(as_contas, "%d;%d;%d;%.2lf;%s\n", tmp->id, tmp->id_owner, tmp->tipo, tmp->saldo, tmp->livro_razao);
+		fprintf(as_contas, "%d;%d;%d;%.2lf;%150s\n", tmp->id, tmp->id_owner, tmp->tipo, tmp->saldo, tmp->livro_razao);
 	}
 	fclose(as_contas);
 }

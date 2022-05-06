@@ -5,9 +5,9 @@ void* Operacoes_Levantar(Clientes** clts, Contas** cnts, uint* clts_size, uint* 
 {
 	/* login necessário para editar conta */
 	char guess[40]; uint id; Clientes* result;
-	if (!Security_Login(clts, &result, guess, &id)) return -1;
+	if (!Security_Login(clts, &result, guess, &id)) return NULL;
 
-	if (!LinkedList_ShowContas_Clientes(result, cnts)) return -1;
+	if (!LinkedList_ShowContas_Clientes(result, cnts)) return NULL;
 
 	char str[20]; uint opcao;
 	printf("\nEscolha uma conta: ");
@@ -31,7 +31,7 @@ void* Operacoes_Levantar(Clientes** clts, Contas** cnts, uint* clts_size, uint* 
 	{
 		printf("\nMontante inválido!");
 		int check = getchar();
-		return -1;
+		return NULL;
 	}
 
 	tmp->saldo -= montante;
@@ -60,5 +60,5 @@ void* Operacoes_Levantar(Clientes** clts, Contas** cnts, uint* clts_size, uint* 
 	free(new_str);
 
 	int check = getchar();
-	return 0;
+	return NULL;
 }

@@ -19,7 +19,7 @@ void* Criar_Clientes(Clientes** clts, Contas** cnts, uint* clts_size, uint* cnts
 		int check = getchar();
 		free(novo);
 		novo = NULL;
-		return  -1;
+		return  NULL;
 	}
 	novo->nome = (char*)malloc(strlen(string) * sizeof(char));
 	if (novo->nome == NULL)
@@ -37,7 +37,7 @@ void* Criar_Clientes(Clientes** clts, Contas** cnts, uint* clts_size, uint* cnts
 		free(novo);
 		novo = NULL;
 		int check = getchar();
-		return -1;
+		return NULL;
 	}
 	Security_Encrypt_String(string);
 	novo->pin = (char*)malloc(strlen(string) * sizeof(char));
@@ -58,7 +58,7 @@ void* Criar_Clientes(Clientes** clts, Contas** cnts, uint* clts_size, uint* cnts
 		free(novo);
 		novo = NULL;
 		int check = getchar();
-		return -1;
+		return NULL;
 	}
 	sprintf(string, "%u/%u/%u", dia, mes, ano);
 	novo->data = (char*)malloc(strlen(string) * sizeof(char));

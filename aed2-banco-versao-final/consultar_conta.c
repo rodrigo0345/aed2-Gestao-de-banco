@@ -5,9 +5,9 @@ void* Consultar_Contas(Clientes** clts, Contas** cnts, uint* clts_size, uint* cn
 {
 	/* login necessário para consultar as contas */
 	char guess[40]; uint id; Clientes* result;
-	if (!Security_Login(clts, &result, guess, &id)) return -1;
+	if (!Security_Login(clts, &result, guess, &id)) return NULL;
 
-	if (!LinkedList_ShowContas_Clientes(result, cnts)) return -1;
+	if (!LinkedList_ShowContas_Clientes(result, cnts)) return NULL;
 
 	char str[20]; uint opcao;
 	printf("\nEscolha o ID da conta que pretende consultar: ");
@@ -19,7 +19,7 @@ void* Consultar_Contas(Clientes** clts, Contas** cnts, uint* clts_size, uint* cn
 	{
 		printf("\nO id que escolheu não existe");
 		int check = getchar();
-		return -1;
+		return NULL;
 	}
 
 	printf("\n[1] - Consultar a sua posição global\n");
@@ -37,7 +37,7 @@ void* Consultar_Contas(Clientes** clts, Contas** cnts, uint* clts_size, uint* cn
 		{
 			printf("Não existem contas associadas a este cliente!");
 			int check = getchar();
-			return 0;
+			return NULL;
 		}
 
 		char* key = strtok(result->contas_associadas, "/");
@@ -77,8 +77,8 @@ void* Consultar_Contas(Clientes** clts, Contas** cnts, uint* clts_size, uint* cn
 	{
 		printf("\nOpção inválida!");
 		int check = getchar();
-		return -1;
+		return NULL;
 	}
 
-	return 0;
+	return NULL;
 }

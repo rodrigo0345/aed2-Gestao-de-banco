@@ -10,7 +10,7 @@ void* Listar_Contas(Clientes** clts, Contas** cnts, uint* clts_size, uint* cnts_
 	{
 		printf("Não existem contas!");
 		int check = getchar();
-		return -1;
+		return NULL;
 	}
 
 	uint count = 0;
@@ -32,5 +32,5 @@ void* Listar_Contas(Clientes** clts, Contas** cnts, uint* clts_size, uint* cnts_
 	}
 
 	system("pause");
-	return -1;
+	return NULL;
 }

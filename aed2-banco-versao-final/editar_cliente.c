@@ -13,10 +13,10 @@ void* Editar_Clientes(Clientes** clts, Contas** cnts, uint* clts_size, uint* cnt
 	dialogo(11);
 	dialogo(12);
 	Security_Input_Int(str, &opcao);
-	if (!Security_Validation_UInt(opcao, 4)) return -1;
+	if (!Security_Validation_UInt(opcao, 4)) return NULL;
 
 	char guess[50]; uint ID; Clientes* result;
-	if (!Security_Login(clts, &result, guess, &ID)) return -1;
+	if (!Security_Login(clts, &result, guess, &ID)) return NULL;
 
 	if (opcao == 1)
 	{
@@ -31,7 +31,7 @@ void* Editar_Clientes(Clientes** clts, Contas** cnts, uint* clts_size, uint* cnt
 			int check = getchar();
 			free(result);
 			result = NULL;
-			return -1;
+			return NULL;
 		}
 
 		strcpy(result->nome, guess);
@@ -50,7 +50,7 @@ void* Editar_Clientes(Clientes** clts, Contas** cnts, uint* clts_size, uint* cnt
 			int check = getchar();
 			free(result);
 			result = NULL;
-			return -1;
+			return NULL;
 		}
 		Security_Encrypt_String(guess);
 		strcpy(result->pin, guess);
@@ -70,7 +70,7 @@ void* Editar_Clientes(Clientes** clts, Contas** cnts, uint* clts_size, uint* cnt
 			int check = getchar();
 			free(result);
 			result = NULL;
-			return -1;
+			return NULL;
 		}
 		sprintf(guess, "%u/%u/%u", dia, mes, ano);
 		strcpy(result->data, guess);

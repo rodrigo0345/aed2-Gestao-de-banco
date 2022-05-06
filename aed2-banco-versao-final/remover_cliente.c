@@ -13,7 +13,7 @@ void* Remover_Clientes(Clientes** clts, Contas** cnts, uint* clts_size, uint* cn
 	SetConsoleTextAttribute(h, 6);
 	printf("\n[REMOVER CLIENTE]");
 	Clientes* result;
-	if (!Security_Login(clts, &result, guess, &ID)) return -1;
+	if (!Security_Login(clts, &result, guess, &ID)) return NULL;
 
 	LinkedList_RemoveNode_Clientes(clts, cnts, ID);
 
@@ -24,5 +24,5 @@ void* Remover_Clientes(Clientes** clts, Contas** cnts, uint* clts_size, uint* cn
 	result = NULL;
 
 	int check = getchar();
-	return 0;
+	return NULL;
 }
