@@ -259,7 +259,11 @@ void LinkedList_Delete_Contas(Contas** head_ref)
 	while (current != NULL)
 	{
 		next = current->next;
-		free(current->livro_razao);
+		if (!strcmp(current->livro_razao, ""))
+		{
+			current->livro_razao = NULL;
+		}
+		free((char*)current->livro_razao);
 		free(current);
 		current = next;
 	}
