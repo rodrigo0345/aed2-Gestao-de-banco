@@ -9,7 +9,7 @@ void* Editar_Contas(Clientes** clts, Contas** cnts, uint* clts_size, uint* cnts_
 
 	if (!LinkedList_ShowContas_Clientes(result, cnts)) return NULL;
 
-	char str[20]; uint opcao;
+	char str[20]; uint opcao = 0;
 	printf("\nEscolha uma conta: ");
 	Security_Input_Int(str, &opcao);
 
@@ -18,7 +18,7 @@ void* Editar_Contas(Clientes** clts, Contas** cnts, uint* clts_size, uint* cnts_
 	{
 		printf("\nO id que escolheu não existe");
 		int check = getchar();
-		return -1;
+		return NULL;
 	}
 
 	/* Opções do utilizador */
@@ -55,7 +55,7 @@ void* Editar_Contas(Clientes** clts, Contas** cnts, uint* clts_size, uint* cnts_
 	{
 		printf("\nOpção inválida!");
 		int check = getchar();
-		return -1;
+		return NULL;
 	}
 
 	printf("\nOpções alteradas com sucesso!");

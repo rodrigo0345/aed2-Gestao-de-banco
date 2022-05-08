@@ -1,9 +1,15 @@
 #include "master.h"
 
-/* Caso seja ativado irá dar output a uma msg e irá encerrar o programa */
-void Security_Error(char* msg)
+/* Caso seja ativado o modo debug, irá dar output ao ficheiro e à linha onde ocorreu o problema e irá encerrar o programa */
+void Security_Error(const char* file, const long line)
 {
-	perror(msg);
+	char output[100] = "";
+	char line_str[10] = "";
+
+	sprintf(line_str, "%ld", line);
+	strcat(output, file); 
+	strcat(output, ": line("); strcat(output, line_str); strcat(output, ")");
+	perror(output);
 	exit(1);
 }
 
@@ -132,7 +138,7 @@ void Security_FileLivroRazao(Contas* curr)
 
 	FILE* open = fopen(filename, "w");
 	if (open == NULL)
-		Security_Error("security.c//Security_FileLivroRazao//open (não foi possivel abrir o ficheiro)");
+		Security_Error(__FILE__, __LINE__);
 
 	char* key = strtok(curr->livro_razao, ";");
 	while (key != NULL)

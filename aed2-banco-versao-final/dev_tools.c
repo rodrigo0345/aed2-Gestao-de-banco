@@ -5,6 +5,8 @@
 void DevTools_Generate(long number)
 {
 	FILE* clientes = fopen("clientes.csv", "w"); FILE* contas = fopen("contas.csv", "w");
+	if (clientes == NULL) Security_Error(__FILE__, __LINE__);
+	if (contas == NULL) Security_Error(__FILE__, __LINE__);
 
 	char header_clientes[] = "id;palavra-passe;nome;data de nascimento;morada;saldo global;contas";
 	char header_contas[] = "ID;Id do proprietário;ordem ou prazo;saldo;livro-razão";
@@ -61,6 +63,6 @@ void DevTools_Options()
 	scanf("%d", &opcao);
 	fflush(stdin);
 	
-	(opcao > 6 || opcao < 0) ? 0: DevTools_Generate((long)CONSTANTE * pow(10, opcao));
+	(opcao > 6 || opcao < 0) ? 0: DevTools_Generate(CONSTANTE * (long)pow(10, opcao));
 	
 }

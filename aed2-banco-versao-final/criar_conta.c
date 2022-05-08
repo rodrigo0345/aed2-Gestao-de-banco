@@ -47,7 +47,7 @@ void* Criar_Contas(Clientes** clts, Contas** cnts, uint* clts_size, uint* cnts_s
 		sprintf(new_str, "%d\0", tmp->id);
 		result->contas_associadas = malloc(sizeof(char) * 70);
 		if (result->contas_associadas == NULL)
-			Security_Error("criar_conta.c//Criar_Contas//result->contas_associadas");
+			Security_Error(__FILE__, __LINE__);
 		strcpy(result->contas_associadas, new_str);
 	}
 	else

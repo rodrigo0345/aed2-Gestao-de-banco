@@ -23,7 +23,7 @@ void* Criar_Clientes(Clientes** clts, Contas** cnts, uint* clts_size, uint* cnts
 	}
 	novo->nome = (char*)malloc(strlen(string) * sizeof(char));
 	if (novo->nome == NULL)
-		Security_Error("methods//Clientes//criar_cliente->c//Criar_Clientes//novo->nome");
+		Security_Error(__FILE__, __LINE__);
 	strcpy(novo->nome, string);
 
 
@@ -42,12 +42,12 @@ void* Criar_Clientes(Clientes** clts, Contas** cnts, uint* clts_size, uint* cnts
 	Security_Encrypt_String(string);
 	novo->pin = (char*)malloc(strlen(string) * sizeof(char));
 	if (novo->pin == NULL)
-		Security_Error("methods//Clientes//criar_cliente.c//Criar_Clientes//novo->pin");
+		Security_Error(__FILE__, __LINE__);
 	strcpy(novo->pin, string);
 
 
 	dialogo(5);
-	uint dia, mes, ano;
+	uint dia = 0, mes = 0, ano = 0;
 	printf("\n\n\   -|Dia|- "); Security_Input_Int(string, &dia);
 	printf("   -|Mes|- "); Security_Input_Int(string, &mes);
 	printf("   -|Ano|- "); Security_Input_Int(string, &ano);
@@ -63,7 +63,7 @@ void* Criar_Clientes(Clientes** clts, Contas** cnts, uint* clts_size, uint* cnts
 	sprintf(string, "%u/%u/%u", dia, mes, ano);
 	novo->data = (char*)malloc(strlen(string) * sizeof(char));
 	if (novo->data == NULL)
-		Security_Error("methods//Clientes//criar_cliente.c//Criar_Clientes//novo->data");
+		Security_Error(__FILE__, __LINE__);
 	strcpy(novo->data, string);
 	fflush(stdin);
 
@@ -71,7 +71,7 @@ void* Criar_Clientes(Clientes** clts, Contas** cnts, uint* clts_size, uint* cnts
 	scanf_s(" %[^\n]%*c", string, 50);
 	novo->morada = (char*)malloc(strlen(string) * sizeof(char));
 	if (novo->morada == NULL)
-		Security_Error("methods//Clientes//criar_cliente.c//Criar_Clientes//novo->morada");
+		Security_Error(__FILE__, __LINE__);
 	strcpy(novo->morada, string);
 	fflush(stdin);
 
@@ -79,7 +79,7 @@ void* Criar_Clientes(Clientes** clts, Contas** cnts, uint* clts_size, uint* cnts
 
 	LinkedList_AppendHead_Clientes(clts, *novo);
 	printf("\nConta criada com sucesso!\nGuarde este código, ID -> [%u]\n", novo->id);
-	getchar();
+	int check = getchar();
 
 	return 0;
 }

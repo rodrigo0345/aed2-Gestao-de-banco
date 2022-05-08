@@ -68,10 +68,8 @@ uint LinkedList_RemoveAlreadyKnownNode_Contas(Contas** lista, Contas** known_nod
 
 void LinkedList_Reverse_Conta(Contas** head_ref);
 
-
-/* Utilizado com fins de debugging, serve para, em caso de erro, alertar o utilizador do erro que tem pela frente
-	msg format = "filename//method//variable"																		*/
-void Security_Error(char* msg);
+/* Caso seja ativado o modo debug, irá dar output ao ficheiro e à linha onde ocorreu o problema e irá encerrar o programa */
+void Security_Error(const char* file, const long line);
 
 /* Liberta a memoria usada pelas linked lists mais importantes do programa "clts" e "cnts" */
 void Security_ProgramExit_Global(Clientes* clts, Contas* cnts);

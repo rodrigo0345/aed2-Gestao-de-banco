@@ -5,11 +5,11 @@
 void Files_LoadMemory(Clientes** clts, Contas** cnts, uint* clts_size, uint* cnts_size)
 {
 	/* abrir o ficheiro */
-	FILE* ficheiro = fopen("clientes.csv", "r");
+	FILE* ficheiro = fopen("cliente.csv", "r");
 	if (ficheiro == NULL)
-		Security_Error("files.c//Files_LoadMemory//clientes");
+		Security_Error(__FILE__, __LINE__);
 
-	char line[250];
+	char line[250] = "";
 	int i = 0;
 	char* key;
 	Clientes* tmp = LinkedList_New_Clientes();
@@ -26,28 +26,28 @@ void Files_LoadMemory(Clientes** clts, Contas** cnts, uint* clts_size, uint* cnt
 		key = strtok(NULL, ";");
 		tmp->pin = malloc(sizeof(char) * 8);
 		if (tmp->pin == NULL)
-			Security_Error("files.c//Files_LoadMemory//tmp->pin");
+			Security_Error(__FILE__, __LINE__);
 		strcat(key, "\0");
 		strcpy(tmp->pin, key);
 
 		key = strtok(NULL, ";");
 		tmp->nome = malloc(sizeof(char) * 60);
 		if (tmp->nome == NULL)
-			Security_Error("files.c//Files_LoadMemory//tmp->nome");
+			Security_Error(__FILE__, __LINE__);
 		strcat(key, "\0");
 		strcpy(tmp->nome, key);
 
 		key = strtok(NULL, ";");
 		tmp->data = malloc(sizeof(char) * 15);
 		if (tmp->data == NULL)
-			Security_Error("files.c//Files_LoadMemory//tmp->data");
+			Security_Error(__FILE__, __LINE__);
 		strcat(key, "\0");
 		strcpy(tmp->data, key);
 
 		key = strtok(NULL, ";");
 		tmp->morada = malloc(sizeof(char) * 60);
 		if (tmp->morada == NULL)
-			Security_Error("files.c//Files_LoadMemory//tmp->morada");
+			Security_Error(__FILE__, __LINE__);
 		strcat(key, "\0");
 		strcpy(tmp->morada, key);
 
@@ -58,7 +58,7 @@ void Files_LoadMemory(Clientes** clts, Contas** cnts, uint* clts_size, uint* cnt
 		key = strtok(NULL, ";");
 		tmp->contas_associadas = malloc(sizeof(char) * 70);
 		if (tmp->contas_associadas == NULL)
-			Security_Error("files.c//Files_LoadMemory//tmp->contas_associadas");
+			Security_Error(__FILE__, __LINE__);
 		if (atoi(key) == 0) tmp->contas_associadas = NULL;
 		else
 		{
@@ -76,7 +76,7 @@ void Files_LoadMemory(Clientes** clts, Contas** cnts, uint* clts_size, uint* cnt
 	/* abrir o ficheiro contas.csv */
 	FILE* ficheiro2 = fopen("contas.csv", "r");
 	if (ficheiro2 == NULL)
-		Security_Error("files.c//Files_LoadMemory//ficheiro");
+		Security_Error(__FILE__, __LINE__);
 
 	Contas* tmp2 = LinkedList_New_Contas();
 	uint prev_id = 0;
@@ -103,7 +103,7 @@ void Files_LoadMemory(Clientes** clts, Contas** cnts, uint* clts_size, uint* cnt
 		key = strtok(NULL, ";");
 		tmp2->livro_razao = (char*)malloc(sizeof(char) * 150);
 		if (tmp2->livro_razao == NULL)
-			Security_Error("files.c//Files_LoadMemory//tmp2->livro_razao");
+			Security_Error(__FILE__, __LINE__);
 		else
 		{
 			key[strlen(key) - 1] = '\0';  /* retira o \n do final da string para facilitar a manipulação de dados */
@@ -129,6 +129,8 @@ void Files_SaveMemory(Clientes** clts, Contas** cnts)
 	LinkedList_Reverse_Conta(cnts);
 
 	FILE* clientes = fopen("clientes.csv", "w");
+	if(clientes==NULL)
+		Security_Error(__FILE__, __LINE__);
 
 	//id,palavra-passe,nome,data de nascimento,morada,saldo global,contas
 	Clientes* curr;

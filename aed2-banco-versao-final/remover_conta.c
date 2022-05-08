@@ -8,7 +8,7 @@ void* Remover_Contas(Clientes** clts, Contas** cnts, uint* clts_size, uint* cnts
 
 	if (!LinkedList_ShowContas_Clientes(result, cnts)) return NULL;
 
-	char str[20]; uint opcao;
+	char str[20]; uint opcao = 0;
 	printf("\nEscolha o ID da conta que pretende eliminar: ");
 	Security_Input_Int(str, &opcao);
 

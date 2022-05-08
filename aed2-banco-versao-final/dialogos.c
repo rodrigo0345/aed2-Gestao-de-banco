@@ -19,7 +19,7 @@ void introducao()
 	printf("\n\n\n |AUTORES| ");
 	SetConsoleTextAttribute(h, 7);
 	printf("\n\n [Ana Gomes] - [A100447]\n [Inês Marques] - [A100434]\n [Rodrigo Casanova] - [A101730]\n\n");
-	getchar();
+	int check = getchar();
 	fflush(stdin);
 }
 

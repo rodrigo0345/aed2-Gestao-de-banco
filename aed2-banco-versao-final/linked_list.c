@@ -6,7 +6,7 @@
 Clientes* LinkedList_New_Clientes()
 {
 	Clientes* tmp = malloc(sizeof(Clientes));
-	if (tmp == NULL) Security_Error("linked_list.c//LinkedList_New_Clientes//tmp");
+	if (tmp == NULL) Security_Error(__FILE__, __LINE__);
 
 	/* informacoes padrao que precisam de ser NULL */
 	tmp->next = NULL;
@@ -20,7 +20,7 @@ Clientes* LinkedList_New_Clientes()
 Contas* LinkedList_New_Contas()
 {
 	Contas* tmp = (Contas*)malloc(sizeof(Contas));
-	if (tmp == NULL) Security_Error("linked_list.c//LinkedList_New_Contas//tmp");
+	if (tmp == NULL) Security_Error(__FILE__, __LINE__);
 
 	/* informacoes padrao que precisam de ser NULL */
 	tmp->next = NULL;
@@ -33,7 +33,7 @@ Contas* LinkedList_New_Contas()
 void LinkedList_AppendHead_Clientes(Clientes** lista, Clientes elemento)
 {
 	Clientes* new_node = (Clientes*)malloc(sizeof(Clientes));
-	if (new_node == NULL) Security_Error("linked_list.c//LinkedList_AppendHaed_Clientes//new_node");
+	if (new_node == NULL) Security_Error(__FILE__, __LINE__);
 
 	if (*lista == NULL)
 	{
@@ -53,7 +53,7 @@ void LinkedList_AppendHead_Clientes(Clientes** lista, Clientes elemento)
 void LinkedList_AppendHead_Contas(Contas** lista, Contas elemento)
 {
 	Contas* new_node = (Contas*)malloc(sizeof(Contas));
-	if (new_node == NULL) Security_Error("files.c//LinkedList_AppendHead_Contas//new_node");
+	if (new_node == NULL) Security_Error(__FILE__, __LINE__);
 
 	if (*lista == NULL)
 	{
@@ -226,7 +226,7 @@ Contas* LinkedList_BinarySearch_Contas(Contas* listHead, uint id)
 	return NULL;
 }
 
-/* Apaga completamente a memória alocada para uma lista ligada (tipo: Clientes) */
+/* Liberta completamente a memória alocada para uma lista ligada (tipo: Clientes) */
 void LinkedList_Delete_Clientes(Clientes** head_ref)
 {
 	Clientes* current = *head_ref;
@@ -236,8 +236,10 @@ void LinkedList_Delete_Clientes(Clientes** head_ref)
 	{
 		next = current->next;
 
-		free(current->contas_associadas);
-		free(current->data);
+		if (current->contas_associadas) /* contas_associadas tanto pode ter espaço alocado como não */
+			free(current->contas_associadas);
+
+		free(current->data); /* temos aqui um erro */
 		free(current->morada);
 		free(current->nome);
 		free(current->pin);
@@ -259,11 +261,10 @@ void LinkedList_Delete_Contas(Contas** head_ref)
 	while (current != NULL)
 	{
 		next = current->next;
-		if (!strcmp(current->livro_razao, ""))
-		{
-			current->livro_razao = NULL;
-		}
-		free((char*)current->livro_razao);
+
+		if (current->livro_razao)  /* livro_razao tanto pode ter espaço alocado como não */
+			free((char*)current->livro_razao);
+		
 		free(current);
 		current = next;
 	}

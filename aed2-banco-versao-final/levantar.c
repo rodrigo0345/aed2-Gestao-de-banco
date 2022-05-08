@@ -9,7 +9,7 @@ void* Operacoes_Levantar(Clientes** clts, Contas** cnts, uint* clts_size, uint* 
 
 	if (!LinkedList_ShowContas_Clientes(result, cnts)) return NULL;
 
-	char str[20]; uint opcao;
+	char str[20]; uint opcao = 0;
 	printf("\nEscolha uma conta: ");
 	Security_Input_Int(str, &opcao);
 
@@ -18,7 +18,7 @@ void* Operacoes_Levantar(Clientes** clts, Contas** cnts, uint* clts_size, uint* 
 	{
 		printf("\nO id que escolheu não existe");
 		int check = getchar();
-		return -1;
+		return NULL;
 	}
 
 	double montante = 0;
@@ -38,7 +38,7 @@ void* Operacoes_Levantar(Clientes** clts, Contas** cnts, uint* clts_size, uint* 
 	result->saldo_global -= montante;
 
 	/* guardar depósito no livro-razão */
-	if (tmp->livro_razao >= sizeof(char) * 149)
+	if (sizeof(tmp->livro_razao) >= sizeof(char) * 149)
 	{
 		LOG_WARNING("Ledger cheio, por favor vá a consultar cliente e esvazie o seu ledger atual");
 		int check = getchar();
@@ -51,12 +51,12 @@ void* Operacoes_Levantar(Clientes** clts, Contas** cnts, uint* clts_size, uint* 
 		sprintf(new_str, "w:[v:%.2lf$ data:(%s)]\0", montante, time_str());
 		tmp->livro_razao = malloc(sizeof(char) * 150);
 		if (tmp->livro_razao == NULL)
-			Security_Error("depositar.c//Operacoes_Levantar//tmp->livro_razao");
+			Security_Error(__FILE__, __LINE__);
 		strcpy(tmp->livro_razao, new_str);
 	}
 	else
 	{
-		sprintf(new_str, "%s;w:[v:%.2lf$ data:(%s)]\0", tmp->livro_razao, montante, time_str());
+		sprintf(new_str, "%s,w:[v:%.2lf$ data:(%s)]\0", tmp->livro_razao, montante, time_str());
 		strcpy(tmp->livro_razao, new_str);
 	}
 	printf("\nLevantamento concluído!\n");

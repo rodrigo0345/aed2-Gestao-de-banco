@@ -16,7 +16,7 @@ unsigned short Time_CheckInputDate_Int(int Day,
 	return 0;
 }
 
-/* retorna a data em formato de string */
+/* retorna a data em formato string */
 char* time_str()
 {
 	time_t mytime = time(NULL);

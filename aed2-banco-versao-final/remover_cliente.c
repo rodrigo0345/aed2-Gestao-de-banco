@@ -7,7 +7,7 @@ void* Remover_Clientes(Clientes** clts, Contas** cnts, uint* clts_size, uint* cn
 	char str[20] = "";
 	char* guess = (char*)malloc(sizeof(char) * 20);
 	if (guess == NULL)
-		Security_Error("remover_clientes.c//Remover_Clientes//char* guess");
+		Security_Error(__FILE__, __LINE__);
 
 	uint ID;
 	SetConsoleTextAttribute(h, 6);
