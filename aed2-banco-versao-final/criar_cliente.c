@@ -61,7 +61,7 @@ void* Criar_Clientes(Clientes** clts, Contas** cnts, uint* clts_size, uint* cnts
 		return NULL;
 	}
 	sprintf(string, "%u/%u/%u", dia, mes, ano);
-	novo->data = (char*)malloc(strlen(string) * sizeof(char));
+	novo->data = (char*)malloc(15 * sizeof(char));
 	if (novo->data == NULL)
 		Security_Error(__FILE__, __LINE__);
 	strcpy(novo->data, string);

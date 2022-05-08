@@ -5,7 +5,7 @@
 void Files_LoadMemory(Clientes** clts, Contas** cnts, uint* clts_size, uint* cnts_size)
 {
 	/* abrir o ficheiro */
-	FILE* ficheiro = fopen("cliente.csv", "r");
+	FILE* ficheiro = fopen("clientes.csv", "r");
 	if (ficheiro == NULL)
 		Security_Error(__FILE__, __LINE__);
 
