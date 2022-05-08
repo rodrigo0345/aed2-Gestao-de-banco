@@ -3,15 +3,14 @@
 
 void* Editar_Clientes(Clientes** clts, Contas** cnts, uint* clts_size, uint* cnts_size)
 {
+	HANDLE h = GetStdHandle(STD_OUTPUT_HANDLE);
+
 	char str[10];
 	uint opcao;
 
-	dialogo(7);
-	dialogo(8);
-	dialogo(9);
-	dialogo(10);
-	dialogo(11);
-	dialogo(12);
+	dialogo(EditarClientes);
+	dialogo(Selecao);
+
 	Security_Input_Int(str, &opcao);
 	if (!Security_Validation_UInt(opcao, 4)) return NULL;
 
@@ -20,14 +19,16 @@ void* Editar_Clientes(Clientes** clts, Contas** cnts, uint* clts_size, uint* cnt
 
 	if (opcao == 1)
 	{
-		printf("Indique o novo Nome: ");
+		dialogo(IntroduzirNome);
 		scanf_s("%[^\n]%*c", guess, 50);
 		fflush(stdin);
 
 		if (Security_CheckForDigits_String(guess) || strlen(guess) <= 1)
 		{
 			system("cls");
-			printf("Nome inválido! (Apenas são permitidas letras e espaços)");
+
+			dialogo(NomeInvalido);
+
 			int check = getchar();
 			free(result);
 			result = NULL;
@@ -35,18 +36,18 @@ void* Editar_Clientes(Clientes** clts, Contas** cnts, uint* clts_size, uint* cnt
 		}
 
 		strcpy(result->nome, guess);
-		printf("Operação concluída!");
 	}
 	else if (opcao == 2)
 	{
-		printf("Indique o novo PIN: ");
+		dialogo(CodigoDeAcesso);
+
 		scanf_s("%[^\n]%*c", guess, 50);
 		fflush(stdin);
 
 		if (strlen(guess) > 6 || strlen(guess) <= 0)
 		{
 			system("cls");
-			printf("Código inválido! (Apenas são permitidos [0 -> 6] carateres)");
+			dialogo(CodigoInvalido);
 			int check = getchar();
 			free(result);
 			result = NULL;
@@ -57,16 +58,20 @@ void* Editar_Clientes(Clientes** clts, Contas** cnts, uint* clts_size, uint* cnt
 	}
 	else if (opcao == 3)
 	{
-		printf("Indique a nova data de nascimento:\n");
+		dialogo(DataDeNascimento);
 
-		uint dia, mes, ano;
-		printf("\n\nDia: "); Security_Input_Int(guess, &dia);
-		printf("\nMes: ");	Security_Input_Int(guess, &mes);
-		printf("\nAno: ");	Security_Input_Int(guess, &ano);
+		uint dia = 0, mes = 0, ano = 0;
+
+		SetConsoleTextAttribute(h, 7);
+		printf("\n\n-| Dia |- "); Security_Input_Int(guess, &dia);
+		printf("-| Mes |- ");	Security_Input_Int(guess, &mes);
+		printf("-| Ano |- ");	Security_Input_Int(guess, &ano);
 		if (!Time_CheckInputDate_Int(dia, mes, ano))
 		{
 			system("cls");
-			printf("Data inválida!");
+
+			dialogo(DataInvalida);
+
 			int check = getchar();
 			free(result);
 			result = NULL;
@@ -77,11 +82,14 @@ void* Editar_Clientes(Clientes** clts, Contas** cnts, uint* clts_size, uint* cnt
 	}
 	else if (opcao == 4)
 	{
-		printf("Indique a nova morada:\n");
+		dialogo(Localidade);
+
 		scanf_s("%[^\n]%*c", guess, 50);
 		strcpy(result->morada, guess);
 		fflush(stdin);
 	}
+
+	dialogo(OperacaoConcluida);
 
 	int check = getchar();
 	return 0;

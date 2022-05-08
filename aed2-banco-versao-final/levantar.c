@@ -10,26 +10,32 @@ void* Operacoes_Levantar(Clientes** clts, Contas** cnts, uint* clts_size, uint* 
 	if (!LinkedList_ShowContas_Clientes(result, cnts)) return NULL;
 
 	char str[20]; uint opcao = 0;
-	printf("\nEscolha uma conta: ");
+
+	dialogo(SelecioneIDConta);
+
 	Security_Input_Int(str, &opcao);
 
 	Contas* tmp = LinkedList_BinarySearch_Contas(*cnts, opcao);
 	if (tmp == NULL || result->id != tmp->id_owner)
 	{
-		printf("\nO id que escolheu não existe");
+		dialogo(IDInvalido);
+
 		int check = getchar();
 		return NULL;
 	}
 
-	double montante = 0;
-	printf("\nIndique o montante (use vírgula para casas decimais): ");
+	double montante = 0.0;
+
+	dialogo(Montante);
+
 	fgets(str, sizeof(str) + 1, stdin);
 	montante = atof(str);
 	fflush(stdin);
 
 	if (!Security_Validation_UInt((uint)montante, 100000000))
 	{
-		printf("\nMontante inválido!");
+		dialogo(MontanteInvalido);
+
 		int check = getchar();
 		return NULL;
 	}
@@ -59,7 +65,8 @@ void* Operacoes_Levantar(Clientes** clts, Contas** cnts, uint* clts_size, uint* 
 		sprintf(new_str, "%s,w:[v:%.2lf$ data:(%s)]\0", tmp->livro_razao, montante, time_str());
 		strcpy(tmp->livro_razao, new_str);
 	}
-	printf("\nLevantamento concluído!\n");
+
+	dialogo(OperacaoConcluida);
 
 	new_str = NULL;
 	free(new_str);

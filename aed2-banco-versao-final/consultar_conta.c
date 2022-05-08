@@ -3,29 +3,27 @@
 
 void* Consultar_Contas(Clientes** clts, Contas** cnts, uint* clts_size, uint* cnts_size)
 {
-	/* login necessário para consultar as contas */
+	/* login necessário para consultar as contas do cliente */
 	char guess[40]; uint id; Clientes* result;
 	if (!Security_Login(clts, &result, guess, &id)) return NULL;
 
 	if (!LinkedList_ShowContas_Clientes(result, cnts)) return NULL;
 
-	char str[20]; uint opcao;
-	printf("\nEscolha o ID da conta que pretende consultar: ");
+	char str[20] = ""; uint opcao = 0;
+
+	dialogo(SelecioneIDConta);
 	Security_Input_Int(str, &opcao);
 
 	uint curr_id = opcao;
 	Contas* curr = LinkedList_BinarySearch_Contas(*cnts, curr_id);
 	if (curr == NULL || result->id != curr->id_owner)
 	{
-		printf("\nO id que escolheu não existe");
+		dialogo(SemClientes);
 		int check = getchar();
 		return NULL;
 	}
 
-	printf("\n[1] - Consultar a sua posição global\n");
-	printf("[2] - Guardar o livro-razão da conta num ficheiro .txt\n");
-
-	printf("\n[INTRODUZA O ALGARISMO REFERENTE À SUA ESCOLHA] - ");
+	dialogo(ConsultarConta);
 	Security_Input_Int(str, &opcao);
 
 	if (opcao == 1)
@@ -35,7 +33,7 @@ void* Consultar_Contas(Clientes** clts, Contas** cnts, uint* clts_size, uint* cn
 
 		if (result->contas_associadas == NULL)
 		{
-			printf("Não existem contas associadas a este cliente!");
+			dialogo(ClienteSemContas);
 			int check = getchar();
 			return NULL;
 		}
@@ -66,7 +64,7 @@ void* Consultar_Contas(Clientes** clts, Contas** cnts, uint* clts_size, uint* cn
 
 			key = strtok(NULL, "/");
 		}
-		printf("Posição global do cliente: ID[%d]\tSaldo à Ordem [%.2lf$]\tSaldo a Prazo[%.2lf$]", curr->id, saldo_ordem, saldo_prazo);
+		printf("-| POSIÇÃO GLOBAL DO CLIENTE |- ID[%d]\tSaldo à Ordem [%.2lf$]\tSaldo a Prazo[%.2lf$]", curr->id, saldo_ordem, saldo_prazo);
 		int check = getchar();
 	}
 	else if (opcao == 2)
@@ -75,7 +73,7 @@ void* Consultar_Contas(Clientes** clts, Contas** cnts, uint* clts_size, uint* cn
 	}
 	else
 	{
-		printf("\nOpção inválida!");
+		dialogo(OpcaoInvalida);
 		int check = getchar();
 		return NULL;
 	}

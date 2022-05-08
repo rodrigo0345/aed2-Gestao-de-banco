@@ -52,7 +52,7 @@ void Files_LoadMemory(Clientes** clts, Contas** cnts, uint* clts_size, uint* cnt
 		strcpy(tmp->morada, key);
 
 		key = strtok(NULL, ";");
-		replace(key, ',', '.');
+		Security_Replace_Char(key, ',', '.');
 		tmp->saldo_global = atof(key);
 
 		key = strtok(NULL, ";");
@@ -97,7 +97,7 @@ void Files_LoadMemory(Clientes** clts, Contas** cnts, uint* clts_size, uint* cnt
 
 		key = strtok(NULL, ";");
 		/* troca a virgula por um ponto de forma a conseguir fazer a conversa~o de string para float */
-		replace(key, ',', '.');
+		Security_Replace_Char(key, ',', '.');
 		tmp2->saldo = atof(key);
 
 		key = strtok(NULL, ";");

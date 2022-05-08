@@ -101,9 +101,6 @@ void Files_LoadMemory(Clientes** clts, Contas** cnts, uint* clts_size, uint* cnt
 /* Mostra ao utilizador algumas informco~es iniciais sobre a nossa aplicaca~o */
 void introducao();
 
-/* Guarda as mensagens para mostrar ao utilizador e tem como objetivo nao atrapalhar o desenvolvimento */
-void dialogo(int id);
-
 /* Garante que a data introduzida pelo utilizador e´ maior que o ano 1800 e que de facto e´ valida */
 unsigned short Time_CheckInputDate_Int(int Day, int Month, int Year);
 
@@ -111,9 +108,81 @@ unsigned short Time_CheckInputDate_Int(int Day, int Month, int Year);
 char* time_str();
 
 /* tem como input uma string e troca um carater dessa string por outra string */
-void replace(char* s, char ch, char repl);
+void Security_Replace_Char(char* s, char ch, char repl);
 
 void DevTools_Options();
 
 void Files_LoadMemory(Clientes** clts, Contas** cnts, uint* clts_size, uint* cnts_size);
 void Files_SaveMemory(Clientes** clts, Contas** cnts);
+
+
+/* --- dialogo --- */
+
+enum dialogos { /* organiza as falas com os utilizadores*/
+	MenuInicial = 1, 
+	CriarNovoUtilizador,
+	IntroduzirNome, 
+	CodigoDeAcesso,
+	DataDeNascimento,
+	Localidade,
+	EditarClientes,
+	Selecao,
+	ConsultarCliente,
+	Dev,
+	ClienteSemContas, 
+	IndiqueLocalidade,
+	ConsultarConta, 
+	TiposDeContas,
+	LocalidadeInvalida, 
+	SemClientes,
+	SemContasComSNegativo, 
+	SelecioneIDConta,
+	OpcaoInvalida = 20,
+	CodigoInvalido,
+	DataInvalida,
+	ContaCriadaSucesso,
+	NomeInvalido,
+	OperacaoConcluida,
+	IDInvalido,
+	SelecioneOpcao,
+	SemContas,
+	RemoverCliente,
+	ClienteRemovidoSucesso,
+	Montante,
+	MontanteInvalido,
+};
+
+/* Comandos disponiveis:
+	- MenuInicial
+	- CriarNovoUtilizador
+	- IntroduzirNome
+	- CodigoDeAcesso
+	- DataDeNascimento
+	- Localidade
+	- EditarClientes
+	- Selecao
+	- ConsultarCliente
+	- Dev
+	- ClienteSemContas
+	- IndiqueLocalidade
+	- ConsultarConta 
+	- TiposDeContas
+	- LocalidadeInvalida
+	- SemClientes
+	- SemContasComSNegativo
+	- SelecioneIDConta
+	- OpcaoInvalida
+	- CodigoInvalido
+	- DataInvalida 
+	- ContaCriadaSucesso
+	- NomeInvalido
+	- OperacaoConcluida
+	- IDInvalido 
+	- SelecioneOpcao
+	- SemContas
+	- RemoverCliente
+	- ClienteRemovidoSucesso
+	- Montante
+	- MontanteInvalido
+*/
+void dialogo(int id);

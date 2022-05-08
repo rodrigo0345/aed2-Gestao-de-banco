@@ -6,7 +6,7 @@ void* Criar_Contas(Clientes** clts, Contas** cnts, uint* clts_size, uint* cnts_s
 	/* login necessário para criar conta */
 	char guess[40]; uint id; Clientes* result;
 	if (!Security_Login(clts, &result, guess, &id)) return NULL;
-	if (sizeof(result->contas_associadas) >= sizeof(char) * 69)
+	if (sizeof(result->contas_associadas) >= sizeof(char) * 59)
 	{
 		LOG_WARNING("Atingiu o numero máximo de contas associadas! Por favor diriga-se a um dos nossos balcões.");
 		int check = getchar();
@@ -15,15 +15,14 @@ void* Criar_Contas(Clientes** clts, Contas** cnts, uint* clts_size, uint* cnts_s
 
 	Contas* tmp = LinkedList_New_Contas();
 
-	printf("\n[1] - Criar conta a Prazo\n");
-	printf("[2] - Criar conta à Ordem\n");
+	dialogo(TiposDeContas);
 
 	char aux[20]; uint opcao;
 	Security_Input_Int(aux, &opcao);
 
 	if (!Security_Validation_UInt(opcao, 2))
 	{
-		printf("Opção inválida!");
+		dialogo(OpcaoInvalida);
 		int check = getch();
 		return -1;
 	}
@@ -58,8 +57,8 @@ void* Criar_Contas(Clientes** clts, Contas** cnts, uint* clts_size, uint* cnts_s
 
 
 	LinkedList_AppendHead_Contas(cnts, *tmp);
-
-	printf("\nConta criada com sucesso!");
+	dialogo(ContaCriadaSucesso);
+	
 	free(new_str);
 
 	return 0;

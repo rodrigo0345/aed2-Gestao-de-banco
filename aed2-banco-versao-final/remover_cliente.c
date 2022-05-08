@@ -3,22 +3,21 @@
 
 void* Remover_Clientes(Clientes** clts, Contas** cnts, uint* clts_size, uint* cnts_size)
 {
-	HANDLE h = GetStdHandle(STD_OUTPUT_HANDLE);
 	char str[20] = "";
 	char* guess = (char*)malloc(sizeof(char) * 20);
 	if (guess == NULL)
 		Security_Error(__FILE__, __LINE__);
 
 	uint ID;
-	SetConsoleTextAttribute(h, 6);
-	printf("\n[REMOVER CLIENTE]");
+	
+	dialogo(RemoverCliente);
+
 	Clientes* result;
 	if (!Security_Login(clts, &result, guess, &ID)) return NULL;
 
 	LinkedList_RemoveNode_Clientes(clts, cnts, ID);
 
-	SetConsoleTextAttribute(h, 6);
-	printf("\n[CONTA ELIMINADA COM SUCESSO] (não se esqueça de SAIR E GUARDAR para aplicar as alterações)");
+	dialogo(ClienteRemovidoSucesso);
 
 	free(result);
 	result = NULL;

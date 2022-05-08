@@ -4,7 +4,9 @@
 void* Consultar_Clientes(Clientes** clts, Contas** cnts, uint* clts_size, uint* cnts_size)
 {
 	HANDLE h = GetStdHandle(STD_OUTPUT_HANDLE);
-	dialogo(13);
+
+	dialogo(ConsultarCliente);
+
 	char str[50];
 	int opcao = 0;
 	Security_Input_Int(str, &opcao);
@@ -15,19 +17,12 @@ void* Consultar_Clientes(Clientes** clts, Contas** cnts, uint* clts_size, uint* 
 	Contas* guardado = *cnts;
 	if (opcao == 1)
 	{
-		SetConsoleTextAttribute(h, 3);
-		printf("\n-|");
-		SetConsoleTextAttribute(h, 7);
-		printf("Indique uma localidade: ");
-		SetConsoleTextAttribute(h, 3);
-		printf("|- ");
-		SetConsoleTextAttribute(h, 7);
+		dialogo(16);
 		scanf_s("%[^\n]%*c", str, 50);
 		fflush(stdin);
 		if (Security_CheckForDigits_String(str) || strlen(str) <= 1)
 		{
-			SetConsoleTextAttribute(h, 6);
-			printf("[Localidade inválida] - (Apenas são permitidas letras e espaços)");
+			dialogo(LocalidadeInvalida);
 			int check = getchar();
 			return -1;
 		}
@@ -40,8 +35,10 @@ void* Consultar_Clientes(Clientes** clts, Contas** cnts, uint* clts_size, uint* 
 				found++;
 			}
 		}
-		SetConsoleTextAttribute(h, 6);
-		if (!found) printf("\n[NENHUMA CONTA FOI ENCONTRADA]");
+		if (!found)
+		{
+			dialogo(SemClientes);
+		}
 	}
 	else if (opcao == 2)
 	{
@@ -54,7 +51,10 @@ void* Consultar_Clientes(Clientes** clts, Contas** cnts, uint* clts_size, uint* 
 				found++;
 			}
 		}
-		if (!found) printf("Não existem contas com saldo negativo...");
+		if (!found)
+		{
+			dialogo(SemContasComSNegativo);
+		}
 	}
 	else if (opcao == 3)
 	{

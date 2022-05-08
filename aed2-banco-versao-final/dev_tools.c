@@ -28,7 +28,7 @@ void DevTools_Generate(long number)
 	char contas_associadas[10] = "";
 	double saldo = 50000.34;
 
-	char livro_razao[10] = "d:50000";
+	char livro_razao[13] = "d:[v:50000]";
 
 	int i = 0;
 	for (i = 0; i < number; i++)
@@ -50,14 +50,7 @@ void DevTools_Generate(long number)
 
 void DevTools_Options()
 {
-	printf(" --- Gerar clientes e contas [Dev-Tools] --- \n");
-	printf("[0] - reset clientes.csv e contas.csv \n");
-	printf("[1] - 50 clientes e 50 contas \n");
-	printf("[2] - 500 clientes e 500 contas \n");
-	printf("[3] - 5.000 clientes e 5.000 contas \n");
-	printf("[4] - 50.000 clientes e 50.000 contas \n");
-	printf("[5] - 500.000 clientes e 500.000 contas \n");
-	printf("[6] - 5.000.000 clientes e 5.000.000 contas \n");
+	dialogo(Dev);
 
 	int opcao;
 	scanf("%d", &opcao);

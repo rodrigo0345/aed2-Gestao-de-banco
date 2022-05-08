@@ -3,8 +3,8 @@
 
 void* Criar_Clientes(Clientes** clts, Contas** cnts, uint* clts_size, uint* cnts_size)
 {
-	dialogo(2);
-	dialogo(3);
+	dialogo(CriarNovoUtilizador);
+	dialogo(IntroduzirNome);
 
 	Clientes* novo = LinkedList_New_Clientes();
 	novo->saldo_global = 0;
@@ -12,14 +12,17 @@ void* Criar_Clientes(Clientes** clts, Contas** cnts, uint* clts_size, uint* cnts
 	char string[50] = { 0 };
 	scanf_s("%[^\n]%*c", string, 50);
 	fflush(stdin);
+
 	if (Security_CheckForDigits_String(string) || strlen(string) <= 1)
 	{
 		system("cls");
-		printf("Nome inválido! (Apenas são permitidas letras e espaços)");
+
+		dialogo(NomeInvalido);
+
 		int check = getchar();
 		free(novo);
 		novo = NULL;
-		return  NULL;
+		return NULL;
 	}
 	novo->nome = (char*)malloc(strlen(string) * sizeof(char));
 	if (novo->nome == NULL)
@@ -33,7 +36,8 @@ void* Criar_Clientes(Clientes** clts, Contas** cnts, uint* clts_size, uint* cnts
 	if (strlen(string) > 6 || strlen(string) <= 0)
 	{
 		system("cls");
-		printf("Código inválido! (Apenas são permitidos [0 -> 6] carateres)");
+		dialogo(CodigoInvalido);
+
 		free(novo);
 		novo = NULL;
 		int check = getchar();
@@ -54,7 +58,8 @@ void* Criar_Clientes(Clientes** clts, Contas** cnts, uint* clts_size, uint* cnts
 	if (!Time_CheckInputDate_Int(dia, mes, ano))
 	{
 		system("cls");
-		printf("Data inválida!");
+		dialogo(DataInvalida);
+
 		free(novo);
 		novo = NULL;
 		int check = getchar();
@@ -78,7 +83,17 @@ void* Criar_Clientes(Clientes** clts, Contas** cnts, uint* clts_size, uint* cnts
 	novo->id = (*clts_size)++;
 
 	LinkedList_AppendHead_Clientes(clts, *novo);
-	printf("\nConta criada com sucesso!\nGuarde este código, ID -> [%u]\n", novo->id);
+
+	HANDLE h = GetStdHandle(STD_OUTPUT_HANDLE);
+	SetConsoleTextAttribute(h, 6);
+	printf("\n[CLIENTE CRIADO COM SUCESSO]");
+	SetConsoleTextAttribute(h, 7);
+	printf("\n\n|MEMORIZE O ID -> ");
+	SetConsoleTextAttribute(h, 3);
+	printf("[%u]", novo->id);
+	SetConsoleTextAttribute(h, 7);
+	printf("|\n");
+
 	int check = getchar();
 
 	return 0;

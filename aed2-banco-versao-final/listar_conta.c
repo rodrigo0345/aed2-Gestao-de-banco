@@ -5,10 +5,13 @@
 
 void* Listar_Contas(Clientes** clts, Contas** cnts, uint* clts_size, uint* cnts_size)
 {
+	HANDLE h = GetStdHandle(STD_OUTPUT_HANDLE);
+
 	Contas* curr = *cnts;
 	if (curr == NULL)
 	{
-		printf("Não existem contas!");
+		dialogo(SemContas);
+
 		int check = getchar();
 		return NULL;
 	}
@@ -28,7 +31,7 @@ void* Listar_Contas(Clientes** clts, Contas** cnts, uint* clts_size, uint* cnts_
 	printf("\n");
 	if (count == MAX_ITERATIONS)
 	{
-		printf("Máximo de contas mostrados [%u contas]\n\n", count);
+		printf("MÁXIMO DE CONTAS EXIBIDAS [%u]\n\n", count);
 	}
 
 	system("pause");

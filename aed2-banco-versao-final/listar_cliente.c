@@ -5,10 +5,13 @@
 
 void* Listar_Clientes(Clientes** clts, Contas** cnts, uint* clts_size, uint* cnts_size)
 {
+	HANDLE h = GetStdHandle(STD_OUTPUT_HANDLE);
+
 	Clientes* curr = *clts;
 	if (curr == NULL)
 	{
-		printf("Não existem clientes!");
+		dialogo(SemClientes);
+
 		int check = getchar();
 		return NULL;
 	}
@@ -22,7 +25,8 @@ void* Listar_Clientes(Clientes** clts, Contas** cnts, uint* clts_size, uint* cnt
 	printf("\n");
 	if (count == MAX_ITERATIONS)
 	{
-		printf("Máximo de clientes mostrados [%u clientes]\n\n", count);
+		SetConsoleTextAttribute(h, 6);
+		printf("[MÁXIMO DE CLIENTES EXIBIDOS] - [%u clientes]\n\n", count);
 	}
 
 	system("pause");

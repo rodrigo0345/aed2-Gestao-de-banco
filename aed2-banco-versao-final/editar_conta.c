@@ -3,6 +3,8 @@
 
 void* Editar_Contas(Clientes** clts, Contas** cnts, uint* clts_size, uint* cnts_size)
 {
+	HANDLE h = GetStdHandle(STD_OUTPUT_HANDLE);
+
 	/* login necessário para editar conta */
 	char guess[40]; uint id; Clientes* result;
 	if (!Security_Login(clts, &result, guess, &id)) return NULL;
@@ -10,13 +12,16 @@ void* Editar_Contas(Clientes** clts, Contas** cnts, uint* clts_size, uint* cnts_
 	if (!LinkedList_ShowContas_Clientes(result, cnts)) return NULL;
 
 	char str[20]; uint opcao = 0;
-	printf("\nEscolha uma conta: ");
+	
+	dialogo(SelecioneIDConta);
+
 	Security_Input_Int(str, &opcao);
 
 	Contas* tmp = LinkedList_BinarySearch_Contas(*cnts, opcao);
 	if (tmp == NULL || result->id != tmp->id_owner)
 	{
-		printf("\nO id que escolheu não existe");
+		dialogo(IDInvalido);
+
 		int check = getchar();
 		return NULL;
 	}
@@ -32,7 +37,9 @@ void* Editar_Contas(Clientes** clts, Contas** cnts, uint* clts_size, uint* cnts_
 	}
 
 	printf("[2] - Limpar o livro-razão\n");
-	printf("\nEscolha uma conta: ");
+
+	dialogo(SelecioneOpcao);
+
 	Security_Input_Int(str, &opcao);
 
 	/* alterar o tipo da conta */
@@ -53,12 +60,14 @@ void* Editar_Contas(Clientes** clts, Contas** cnts, uint* clts_size, uint* cnts_
 	}
 	else
 	{
-		printf("\nOpção inválida!");
+		dialogo(OpcaoInvalida);
+
 		int check = getchar();
 		return NULL;
 	}
 
-	printf("\nOpções alteradas com sucesso!");
+	dialogo(OperacaoConcluida);
+
 	int check = getchar();
 	return NULL;
 }

@@ -80,17 +80,19 @@ uint Security_CheckForDigits_String(char* string)
 uint Security_Login(Clientes** clts, Clientes** result, char* guess, uint* id)
 {
 	char str[14];
-	printf("Indique o ID do Cliente: ");
+	printf("\n-| ID DO CLIENTE |- ");
 	Security_Input_Int(str, id);
 
-	printf("Indique o PIN: ");
+	printf("\n-| PIN |- ");
 	scanf_s("%[^\n]%*c", guess, 20);
 	fflush(stdin);
 
 	if (strlen(guess) > 6 || strlen(guess) <= 0)
 	{
 		system("cls");
-		printf("Código inválido! (Apenas são permitidos [0 -> 6] carateres)");
+
+		dialogo(CodigoInvalido);
+
 		int check = getchar();
 		return 0;
 	}
@@ -100,7 +102,8 @@ uint Security_Login(Clientes** clts, Clientes** result, char* guess, uint* id)
 
 	if (*result == NULL)
 	{
-		printf("Cliente não encontrado!");
+		dialogo(SemClientes);
+
 		int check = getchar();
 		return 0;
 	}
@@ -108,7 +111,8 @@ uint Security_Login(Clientes** clts, Clientes** result, char* guess, uint* id)
 	/* ainda existe aqui um problema, ainda não sei porque */
 	if (strcmp(guess, (*result)->pin))
 	{
-		printf("PIN incorreto!");
+		dialogo(CodigoInvalido);
+
 		int check = getchar();
 		free(*result);
 		*result = NULL;
@@ -130,11 +134,11 @@ void Security_Flags(char* argv[])
 /* Cria um ficheiro .txt para guardar o livro-razão de uma conta */
 void Security_FileLivroRazao(Contas* curr)
 {
-	char filename[20];
+	char filename[30];
 
 	/* armazenamos o nome do ficheiro a ser criado em "filename" */
-	sprintf(filename, "%s[%d].txt", "Livro-Razao", curr->id);
-	printf("Localização do ficheiro: %s", filename);
+	sprintf(filename, "%s[%d]-%s.txt", "Livro-Razao", curr->id, time_str());
+	printf("-| Localização do ficheiro |- %s->%s", __FILE__,filename);
 
 	FILE* open = fopen(filename, "w");
 	if (open == NULL)
@@ -149,11 +153,14 @@ void Security_FileLivroRazao(Contas* curr)
 
 	fclose(open);
 
-	printf("\nFicheiro criado com sucesso!");
+	HANDLE h = GetStdHandle(STD_OUTPUT_HANDLE);
+	SetConsoleTextAttribute(h, 6);
+	printf("\n[FICHEIRO CRIADO COM SUCESSO]");
+
 	int check = getchar();
 }
 
-void replace(char* s, char ch, char repl) {
+void Security_Replace_Char(char* s, char ch, char repl) {
 	uint i = 0;
 	while (s[i] != '\0')
 	{

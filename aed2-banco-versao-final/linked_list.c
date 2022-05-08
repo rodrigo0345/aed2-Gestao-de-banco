@@ -337,7 +337,7 @@ uint LinkedList_ShowContas_Clientes(Clientes* cliente, Contas** cnts)
 {
 	if (cliente->contas_associadas == NULL)
 	{
-		printf("Não existem contas associadas a este cliente!");
+		dialogo(15);
 		int check = getchar();
 		return 0;
 	}
