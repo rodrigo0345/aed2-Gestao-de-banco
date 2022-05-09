@@ -137,8 +137,8 @@ void Security_FileLivroRazao(Contas* curr)
 	char filename[30];
 
 	/* armazenamos o nome do ficheiro a ser criado em "filename" */
-	sprintf(filename, "%s[%d]-%s.txt", "Livro-Razao", curr->id, time_str());
-	printf("-| Localização do ficheiro |- %s->%s", __FILE__,filename);
+	sprintf(filename, "%s[%d].txt", "Livro-Razao", curr->id);
+	printf("-| Localização do ficheiro |- %s", __FILE__);
 
 	FILE* open = fopen(filename, "w");
 	if (open == NULL)
