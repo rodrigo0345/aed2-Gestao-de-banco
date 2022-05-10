@@ -62,7 +62,7 @@ void Main_MainLoop(Clientes** clts, Contas** cnts, uint* clts_size, uint* cnts_s
 		system("cls");
 
 		/* menu principal */
-		dialogo(1);
+		dialogo(MenuInicial);
 
 		/* string auxiliar */
 		char str[50];

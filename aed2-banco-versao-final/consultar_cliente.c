@@ -17,7 +17,7 @@ void* Consultar_Clientes(Clientes** clts, Contas** cnts, uint* clts_size, uint* 
 	Contas* guardado = *cnts;
 	if (opcao == 1)
 	{
-		dialogo(16);
+		dialogo(Localidade);
 		scanf_s("%[^\n]%*c", str, 50);
 		fflush(stdin);
 		if (Security_CheckForDigits_String(str) || strlen(str) <= 1)

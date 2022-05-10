@@ -30,7 +30,7 @@ void* Criar_Clientes(Clientes** clts, Contas** cnts, uint* clts_size, uint* cnts
 	strcpy(novo->nome, string);
 
 
-	dialogo(4);
+	dialogo(CodigoDeAcesso);
 	scanf_s("%[^\n]%*c", string, 50);
 	fflush(stdin);
 	if (strlen(string) > 6 || strlen(string) <= 0)
@@ -50,7 +50,7 @@ void* Criar_Clientes(Clientes** clts, Contas** cnts, uint* clts_size, uint* cnts
 	strcpy(novo->pin, string);
 
 
-	dialogo(5);
+	dialogo(DataDeNascimento);
 	uint dia = 0, mes = 0, ano = 0;
 	printf("\n\n\   -|Dia|- "); Security_Input_Int(string, &dia);
 	printf("   -|Mes|- "); Security_Input_Int(string, &mes);
@@ -72,7 +72,7 @@ void* Criar_Clientes(Clientes** clts, Contas** cnts, uint* clts_size, uint* cnts
 	strcpy(novo->data, string);
 	fflush(stdin);
 
-	dialogo(6);
+	dialogo(Localidade);
 	scanf_s(" %[^\n]%*c", string, 50);
 	novo->morada = (char*)malloc(strlen(string) * sizeof(char));
 	if (novo->morada == NULL)
