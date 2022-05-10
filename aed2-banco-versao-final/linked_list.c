@@ -236,9 +236,10 @@ void LinkedList_Delete_Clientes(Clientes** head_ref)
 	{
 		next = current->next;
 
+		/* muitos problemas a libertar memoria */
+
 		//if (current->contas_associadas) /* contas_associadas tanto pode ter espaço alocado como não */
 			//free(current->contas_associadas);
-
 		//free(current->data); /* temos aqui um erro */
 		//free(current->morada);
 		//free(current->nome);
@@ -262,8 +263,10 @@ void LinkedList_Delete_Contas(Contas** head_ref)
 	{
 		next = current->next;
 
+		/* muitos problemas a libertar memoria */
+
 		//if (current->livro_razao)  /* livro_razao tanto pode ter espaço alocado como não */
-			//free((char*)current->livro_razao);
+			//free(current->livro_razao);
 		
 		free(current);
 		current = next;
