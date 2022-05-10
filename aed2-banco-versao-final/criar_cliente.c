@@ -69,16 +69,18 @@ void* Criar_Clientes(Clientes** clts, Contas** cnts, uint* clts_size, uint* cnts
 	novo->data = (char*)malloc(15 * sizeof(char));
 	if (novo->data == NULL)
 		Security_Error(__FILE__, __LINE__);
-	strcpy(novo->data, string);
 	fflush(stdin);
-
+	strcpy(novo->data, string);
+	
 	dialogo(Localidade);
 	scanf_s(" %[^\n]%*c", string, 50);
 	novo->morada = (char*)malloc(strlen(string) * sizeof(char));
 	if (novo->morada == NULL)
 		Security_Error(__FILE__, __LINE__);
-	strcpy(novo->morada, string);
 	fflush(stdin);
+
+	strcpy(novo->morada, string);
+	
 
 	novo->id = (*clts_size)++;
 
@@ -93,6 +95,8 @@ void* Criar_Clientes(Clientes** clts, Contas** cnts, uint* clts_size, uint* cnts
 	printf("[%u]", novo->id);
 	SetConsoleTextAttribute(h, 7);
 	printf("|\n");
+
+	free(novo);
 
 	int check = getchar();
 

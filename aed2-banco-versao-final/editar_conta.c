@@ -3,8 +3,6 @@
 
 void* Editar_Contas(Clientes** clts, Contas** cnts, uint* clts_size, uint* cnts_size)
 {
-	HANDLE h = GetStdHandle(STD_OUTPUT_HANDLE);
-
 	/* login necessário para editar conta */
 	char guess[40]; uint id; Clientes* result;
 	if (!Security_Login(clts, &result, guess, &id)) return NULL;

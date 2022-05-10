@@ -144,11 +144,11 @@ void Security_FileLivroRazao(Contas* curr)
 	if (open == NULL)
 		Security_Error(__FILE__, __LINE__);
 
-	char* key = strtok(curr->livro_razao, ";");
+	char* key = strtok(curr->livro_razao, ",");
 	while (key != NULL)
 	{
 		fprintf(open, "%s\n", key);
-		key = strtok(NULL, ";");
+		key = strtok(NULL, ",");
 	}
 
 	fclose(open);

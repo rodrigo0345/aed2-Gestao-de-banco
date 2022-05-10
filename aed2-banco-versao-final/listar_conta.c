@@ -5,8 +5,6 @@
 
 void* Listar_Contas(Clientes** clts, Contas** cnts, uint* clts_size, uint* cnts_size)
 {
-	HANDLE h = GetStdHandle(STD_OUTPUT_HANDLE);
-
 	Contas* curr = *cnts;
 	if (curr == NULL)
 	{

@@ -3,8 +3,6 @@
 
 void* Editar_Clientes(Clientes** clts, Contas** cnts, uint* clts_size, uint* cnts_size)
 {
-	HANDLE h = GetStdHandle(STD_OUTPUT_HANDLE);
-
 	char str[10];
 	uint opcao;
 
@@ -62,6 +60,7 @@ void* Editar_Clientes(Clientes** clts, Contas** cnts, uint* clts_size, uint* cnt
 
 		uint dia = 0, mes = 0, ano = 0;
 
+		HANDLE h = GetStdHandle(STD_OUTPUT_HANDLE);
 		SetConsoleTextAttribute(h, 7);
 		printf("\n\n-| Dia |- "); Security_Input_Int(guess, &dia);
 		printf("-| Mes |- ");	Security_Input_Int(guess, &mes);

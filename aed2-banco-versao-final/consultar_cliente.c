@@ -3,8 +3,6 @@
 
 void* Consultar_Clientes(Clientes** clts, Contas** cnts, uint* clts_size, uint* cnts_size)
 {
-	HANDLE h = GetStdHandle(STD_OUTPUT_HANDLE);
-
 	dialogo(ConsultarCliente);
 
 	char str[50];

@@ -32,7 +32,7 @@ void* Operacoes_Depositar(Clientes** clts, Contas** cnts, uint* clts_size, uint*
 	montante = atof(str);
 	fflush(stdin);
 
-	if (!Security_Validation_UInt((uint)montante, 100000000))
+	if (!Security_Validation_UInt((uint)montante, 1000000))
 	{
 		dialogo(MontanteInvalido);
 
@@ -44,33 +44,37 @@ void* Operacoes_Depositar(Clientes** clts, Contas** cnts, uint* clts_size, uint*
 	result->saldo_global += montante;
 
 	/* guardar depósito no livro-razão */
-	if (sizeof(tmp->livro_razao) >= sizeof(char) * 130)
+	if (strlen(tmp->livro_razao) >= 180)
 	{
 		LOG_WARNING("Ledger cheio, por favor vá a consultar cliente e esvazie o seu ledger atual");
+		int check = getchar();
+
 		return NULL;
 	}
 
-	const uint tam = strlen(tmp->livro_razao) + 40;
-
-	char* new_str = (char*)malloc(sizeof(char) * tam);
-	if (tmp->livro_razao == NULL || tmp->livro_razao == "")
+	if (tmp->livro_razao == NULL || !strcmp(tmp->livro_razao, ""))
 	{
-		sprintf(new_str, "d:[v:%.2lf$ data:(%s)]\0", montante, time_str());
-		tmp->livro_razao = malloc(sizeof(char) * 60);
+		tmp->livro_razao = malloc(sizeof(char) * 230);
 		if (tmp->livro_razao == NULL)
 			Security_Error(__FILE__, __LINE__);
-		strcpy(tmp->livro_razao, new_str);
+
+		/* ocupa					 28 chars				 + 	8 chars  + 24 chars 	= 60 chars (no pior caso) */
+		sprintf(tmp->livro_razao, "Débito:[montante:%.2lf€ data:(%s)]\0", montante, time_str());
 	}
 	else
 	{
-		sprintf(new_str, "%s,d:[v:%.2lf$ data:(%s)]\0", tmp->livro_razao, montante, time_str());
-		strcpy(tmp->livro_razao, new_str);
+		if (tmp->livro_razao == NULL)
+		{
+			tmp->livro_razao = malloc(sizeof(char) * 230);
+			if (tmp->livro_razao == NULL)
+				Security_Error(__FILE__, __LINE__);
+		}
+
+		/* max: ~215 char */
+		sprintf(tmp->livro_razao, "%s_Débito:[montante:%.2lf€ data:(%s)]\0", tmp->livro_razao, montante, time_str());
 	}
 
 	dialogo(OperacaoConcluida);
-
-	new_str = NULL;
-	free(new_str);
 
 	int check = getchar();
 	return NULL;
