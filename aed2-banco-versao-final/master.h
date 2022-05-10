@@ -26,9 +26,6 @@ void LinkedList_AppendHead_Clientes(Clientes** lista, Clientes elemento);
 /* Elimina uma "node" da lista ligada que é referenciada tendo em conta o id do cliente */
 uint LinkedList_RemoveNode_Clientes(Clientes** lista, Contas** cnts, uint id);
 
-/* Encontrae retorna o meio de uma lista ligada, apenas usada pela "LinkedList_BinarySearch_Clientes(...)" */
-Clientes* LinkedList_FindMiddleNode_Clientes(Clientes* start, Clientes* end);
-
 /* Encontra uma "node" da lista ligada tendo em conta o id do cliente e usando a técnica de pesquisa binária */
 Clientes* LinkedList_BinarySearch_Clientes(Clientes* listHead, uint id);
 
@@ -53,9 +50,6 @@ void LinkedList_AppendHead_Contas(Contas** lista, Contas elemento);
 
 /* Elimina uma "node" da lista ligada que é referenciada tendo em conta o id da conta */
 uint LinkedList_RemoveNode_Contas(Contas** lista, uint id);
-
-/* Encontra e retorna o meio de uma lista ligada, apenas usada pela "LinkedList_BinarySearch_Contas(...)" */
-Contas* LinkedList_FindMiddleNode_Contas(Contas* start, Contas* end);
 
 /* Encontra uma "node" da lista ligada tendo em conta o id da conta e usando a técnica de pesquisa binária */
 Contas* LinkedList_BinarySearch_Contas(Contas* listHead, uint id);
