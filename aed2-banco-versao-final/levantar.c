@@ -3,7 +3,7 @@
 
 void* Operacoes_Levantar(Clientes** clts, Contas** cnts, uint* clts_size, uint* cnts_size)
 {
-	/* login necessário para editar conta */
+	/* login necessÃ¡rio para editar conta */
 	char guess[40]; uint id; Clientes* result;
 	if (!Security_Login(clts, &result, guess, &id)) return NULL;
 
@@ -43,10 +43,10 @@ void* Operacoes_Levantar(Clientes** clts, Contas** cnts, uint* clts_size, uint* 
 	tmp->saldo -= montante;
 	result->saldo_global -= montante;
 
-	/* guardar depósito no livro-razão */
+	/* guardar depÃ³sito no livro-razÃ£o */
 	if (strlen(tmp->livro_razao) >= 180)
 	{
-		LOG_WARNING("Ledger cheio, por favor vá a consultar cliente e esvazie o seu ledger atual");
+		LOG_WARNING("Ledger cheio, por favor vÃ¡ a consultar cliente e esvazie o seu ledger atual");
 
 		int check = getchar();
 		return NULL;
@@ -59,18 +59,18 @@ void* Operacoes_Levantar(Clientes** clts, Contas** cnts, uint* clts_size, uint* 
 			Security_Error(__FILE__, __LINE__);
 
 		// ocupa					 29 chars				 + 	8 chars  + 24 chars 	= 61 chars (no pior caso)
-		sprintf(tmp->livro_razao, "Crédito:[valor:%.2lf€ data:(%s)]\0", montante, time_str());
+		sprintf(tmp->livro_razao, "CrÃ©dito:[valor:%.2lfâ‚¬ data:(%s)]\0", montante, time_str());
 	}
 	else
 	{
 		if (tmp->livro_razao == NULL)
 		{
-			tmp->livro_razao = malloc(sizeof(char) * 320);
+			tmp->livro_razao = malloc(sizeof(char) * 230);
 			if (tmp->livro_razao == NULL)
 				Security_Error(__FILE__, __LINE__);
 		}
 
-		sprintf(tmp->livro_razao, "%s_Crédito:[valor:%.2lf€ data:(%s)]\0", tmp->livro_razao, montante, time_str());
+		sprintf(tmp->livro_razao, "%s_CrÃ©dito:[valor:%.2lfâ‚¬ data:(%s)]\0", tmp->livro_razao, montante, time_str());
 	}
 
 	dialogo(OperacaoConcluida);
