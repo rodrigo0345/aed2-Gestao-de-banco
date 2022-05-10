@@ -337,7 +337,7 @@ uint LinkedList_ShowContas_Clientes(Clientes* cliente, Contas** cnts)
 {
 	if (cliente->contas_associadas == NULL)
 	{
-		dialogo(15);
+		dialogo(SemContas);
 		int check = getchar();
 		return 0;
 	}
