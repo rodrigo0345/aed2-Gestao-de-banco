@@ -1,2 +1,5 @@
 id;palavra-passe;nome;data de nascimento;morada;saldo global;contas
-0;0369<@;Rodrigo;22/6/2003;Barcelos;60,20;1
+0;0369<@;Rodrigo;22/6/2003;Barcelos;4,50;1
+1;0369<@;Ines;20/11/2002;Braga;10,20;2
+2;0369<@;Catarina;3/10/2003;Braga;-300,00;3/4
+3;0369<@;teste;22/3/2000;Braga;20,30;4/5

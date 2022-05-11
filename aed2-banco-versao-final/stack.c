@@ -31,7 +31,8 @@ void Stack_Push_Movimentos(Movimentos** s, Movimentos* d)
 	}
 }
 
-void Stack_Pop_Movimentos(Movimentos** s) 
+/* Metodo usado apenas neste arquivo */
+static void Stack_Pop_Movimentos(Movimentos** s) 
 {
 	Movimentos* aux;
 	aux = *s;
@@ -43,16 +44,6 @@ void Stack_Pop_Movimentos(Movimentos** s)
 		free(aux);
 		aux = NULL;
 	}
-}
-
-static Movimentos* Stack_Peek_Movimentos(Movimentos* s) 
-{
-	Movimentos* p = NULL;
-	if (s != NULL) {
-		p = (Movimentos*)malloc(sizeof(Movimentos));
-		p = s;
-	}
-	return p;
 }
 
 static int Stack_Empty_Movimentos(Movimentos* s) 

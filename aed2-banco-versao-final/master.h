@@ -9,11 +9,17 @@
 #include <locale.h>
 #include <windows.h>
 #include <conio.h>
-#include <crtdbg.h> /* usado para detetar memory leaks no visual studio 2022 */
+
+/* usado para detetar memory leaks no visual studio 2022 */
+#include <crtdbg.h> 
+
 #include "master.h"
 #include "structs.h"
 
 #define LOG_WARNING(msg) printf("\nAviso: %s\n", msg);
+
+/* menu principal do programa */
+void Menu_MainLoop(Clientes** clts, Contas** cnts, uint* clts_size, uint* cnts_size);
 
 /* --- Clientes --- */
 
@@ -180,9 +186,7 @@ enum dialogos { /* organiza as falas com os utilizadores*/
 */
 void dialogo(int id);
 
-/* Stack */
+/* Stack dos movimentos */
 Movimentos* Stack_Create_Movimentos(uint id_conta);
 void Stack_Push_Movimentos(Movimentos** s, Movimentos* d);
-void Stack_Pop_Movimentos(Movimentos** s);
-Movimentos* Stack_Peek_Movimentos(Movimentos* s);
 void Stack_Show_Movimentos(Movimentos* s);

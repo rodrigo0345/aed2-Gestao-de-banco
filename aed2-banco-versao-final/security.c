@@ -18,7 +18,7 @@ void Security_ProgramExit_Global(Clientes* clts, Contas* cnts)
 {
 	LinkedList_Delete_Clientes(&clts);
 	LinkedList_Delete_Contas(&cnts);
-	exit(0);
+	//exit(0);
 }
 
 /* Método alternativo ao scanf, apenas funciona para numeros */
@@ -114,8 +114,6 @@ uint Security_Login(Clientes** clts, Clientes** result, char* guess, uint* id)
 		dialogo(CodigoInvalido);
 
 		int check = getchar();
-		free(*result);
-		*result = NULL;
 		return 0;
 	}
 	return 1;

@@ -159,6 +159,7 @@
     <ClCompile Include="listar_cliente.c" />
     <ClCompile Include="listar_conta.c" />
     <ClCompile Include="main.c" />
+    <ClCompile Include="menu.c" />
     <ClCompile Include="remover_cliente.c" />
     <ClCompile Include="remover_conta.c" />
     <ClCompile Include="security.c" />

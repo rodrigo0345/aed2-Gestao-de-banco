@@ -238,10 +238,7 @@ void LinkedList_Delete_Clientes(Clientes** head_ref)
 		next = current->next;
 
 		free(current->morada);
-
-		if(current->contas_associadas != NULL)
-			free(current->contas_associadas);
-
+		free(current->contas_associadas);
 		free(current->nome);
 		free(current->pin);
 		free(current->data);
@@ -282,6 +279,7 @@ void LinkedList_Reverse_Cliente(Clientes** head_ref)
 	Clientes* prev = NULL;
 	Clientes* current = *head_ref;
 	Clientes* next = NULL;
+
 	while (current != NULL) {
 		// Store next
 		next = current->next;
