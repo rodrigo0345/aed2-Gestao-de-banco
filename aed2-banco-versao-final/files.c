@@ -70,8 +70,8 @@ void Files_LoadMemory(Clientes** clts, Contas** cnts, uint* clts_size, uint* cnt
 		(*clts_size)++;
 		LinkedList_AppendHead_Clientes(clts, *tmp);
 	}
-	/* libertar a memoria usada */
-	free(tmp);
+
+	fclose(ficheiro);
 
 	/* abrir o ficheiro contas.csv */
 	FILE* ficheiro2 = fopen("contas.csv", "r");
@@ -87,6 +87,8 @@ void Files_LoadMemory(Clientes** clts, Contas** cnts, uint* clts_size, uint* cnt
 	while (fgets(line, 200, ficheiro2) != NULL && strcmp(line, "\n"))
 	{
 		key = strtok(line, ";");
+
+		tmp2->movimentos = NULL;
 		tmp2->id = atoi(key);
 
 		key = strtok(NULL, ";");
@@ -100,26 +102,62 @@ void Files_LoadMemory(Clientes** clts, Contas** cnts, uint* clts_size, uint* cnt
 		Security_Replace_Char(key, ',', '.');
 		tmp2->saldo = atof(key);
 
-		key = strtok(NULL, ";");
-		tmp2->livro_razao = (char*)malloc(sizeof(char) * 150);
-		if (tmp2->livro_razao == NULL)
-			Security_Error(__FILE__, __LINE__);
-		else
-		{
-			key[strlen(key) - 1] = '\0';  /* retira o \n do final da string para facilitar a manipulação de dados */
-		}
-		strcpy(tmp2->livro_razao, key);
-
 		(*cnts_size)++;
 		LinkedList_AppendHead_Contas(cnts, *tmp2);
-
-		tmp2->livro_razao = NULL;
 	}
 
-	/* libertar a memoria usada */
-	free(tmp2);
 	fclose(ficheiro2);
-	fclose(ficheiro);
+
+	/* abrir o ficheiro contas.csv */
+	FILE* ficheiro3 = fopen("Movimentos.csv", "r");
+	if (ficheiro2 == NULL)
+		Security_Error(__FILE__, __LINE__);
+
+	/* recolher o cabecalho do Movimentos.csv */
+	fgets(line, 250, ficheiro3);
+
+	/* guardar as informacoes do ficheiro Movimentos.csv na struct das contas recorrendo à stack movimentos */
+	/* sem duvida, o metodo mais lento do programa */
+	while (fgets(line, 200, ficheiro3) != NULL && strcmp(line, "\n"))
+	{
+		/* id (pesquisa pela conta com o id fornecido)*/
+		key = strtok(line, ";");
+		uint id = atoi(key);
+
+		Contas* aux = LinkedList_BinarySearch_Contas(*cnts, id);
+
+		if (aux == NULL)
+		{
+			continue;
+		}
+
+		Movimentos* tmp = Stack_Create_Movimentos(id);
+	
+		/* tipo de movimento (credito ou debito)*/
+		key = strtok(NULL, ";");
+		tmp->tipo = (char*)malloc(sizeof(char) * 60);
+		if (tmp->tipo == NULL)
+			Security_Error(__FILE__, __LINE__);
+		strcat(key, "\0");
+		strcpy(tmp->tipo, key);
+
+		/* montante */
+		key = strtok(NULL, ";");
+		Security_Replace_Char(key, ',', '.');
+		tmp->montante = atof(key);
+
+		/* data */
+		key = strtok(NULL, ";");
+		tmp->data = (char*)malloc(sizeof(char) * 60);
+		if (tmp->data == NULL)
+			Security_Error(__FILE__, __LINE__);
+		key[strlen(key) - 1] = '\0';
+		strcpy(tmp->data, key);
+
+		Stack_Push_Movimentos(&(aux->movimentos), tmp);
+	}
+
+	fclose(ficheiro3);
 }
 
 void Files_SaveMemory(Clientes** clts, Contas** cnts)
@@ -146,14 +184,17 @@ void Files_SaveMemory(Clientes** clts, Contas** cnts)
 	fclose(clientes);
 
 	FILE* as_contas = fopen("contas.csv", "w");
+	FILE* os_movimentos = fopen("movimentos.csv", "w");
 
 	fprintf(as_contas, "%s\n", "ID;Id do proprietário;ordem ou prazo;saldo;livro-razão");
 
 	Contas* tmp;
 	for (tmp = *cnts; tmp != NULL; tmp = tmp->next)
 	{
-		fprintf(as_contas, "%d;%d;%d;%.2lf;%s\n", tmp->id, tmp->id_owner, tmp->tipo, tmp->saldo, tmp->livro_razao);
+
+		fprintf(as_contas, "%d;%d;%d;%.2lf\n", tmp->id, tmp->id_owner, tmp->tipo, tmp->saldo);
 	}
 	fclose(as_contas);
+	fclose(os_movimentos);
 }
 

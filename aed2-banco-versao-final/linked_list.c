@@ -23,6 +23,7 @@ Contas* LinkedList_New_Contas()
 	if (tmp == NULL) Security_Error(__FILE__, __LINE__);
 
 	/* informacoes padrao que precisam de ser NULL */
+	tmp->movimentos = NULL;
 	tmp->next = NULL;
 	tmp->prev = NULL;
 
@@ -238,12 +239,11 @@ void LinkedList_Delete_Clientes(Clientes** head_ref)
 
 		/* muitos problemas a libertar memoria */
 
-		//if (current->contas_associadas) /* contas_associadas tanto pode ter espaço alocado como não */
-			//free(current->contas_associadas);
-		//free(current->data); /* temos aqui um erro */
-		//free(current->morada);
-		//free(current->nome);
-		//free(current->pin);
+		free(current->contas_associadas);
+		free(current->data); /* temos aqui um erro */
+		free(current->morada);
+		free(current->nome);
+		free(current->pin);
 
 		free(current);
 		current = next;
@@ -263,11 +263,9 @@ void LinkedList_Delete_Contas(Contas** head_ref)
 	{
 		next = current->next;
 
-		/* muitos problemas a libertar memoria */
+		/* apaga os movimentos associados à conta */
+		Stack_Destroy_Movimentos(&(current->movimentos));
 
-		//if (current->livro_razao)  /* livro_razao tanto pode ter espaço alocado como não */
-			//free(current->livro_razao);
-		
 		free(current);
 		current = next;
 	}

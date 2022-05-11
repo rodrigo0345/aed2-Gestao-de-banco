@@ -34,7 +34,7 @@ void* Editar_Contas(Clientes** clts, Contas** cnts, uint* clts_size, uint* cnts_
 		printf("\n[1] - Mudar o tipo da conta [%s -> %s]\n", "Ordem", "Prazo");
 	}
 
-	printf("[2] - Limpar o livro-razão\n");
+	printf("\n[2] - Limpar o livro-razão\n");
 
 	dialogo(SelecioneOpcao);
 
@@ -54,7 +54,7 @@ void* Editar_Contas(Clientes** clts, Contas** cnts, uint* clts_size, uint* cnts_
 	}
 	else if (opcao == 2)
 	{
-		tmp->livro_razao = "";
+		Stack_Destroy_Movimentos(&(tmp->movimentos));
 	}
 	else
 	{

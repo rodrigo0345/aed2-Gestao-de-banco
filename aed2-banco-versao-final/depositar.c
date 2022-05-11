@@ -43,36 +43,14 @@ void* Operacoes_Depositar(Clientes** clts, Contas** cnts, uint* clts_size, uint*
 	tmp->saldo += montante;
 	result->saldo_global += montante;
 
-	/* guardar depósito no livro-razão */
-	if (strlen(tmp->livro_razao) >= 180)
-	{
-		LOG_WARNING("Ledger cheio, por favor vá a consultar cliente e esvazie o seu ledger atual");
-		int check = getchar();
+	/* guarda a transação */
+	Movimentos* aux = Stack_Create_Movimentos(tmp->id);
 
-		return NULL;
-	}
+	aux->data = time_str();
+	aux->montante = montante;
+	aux->tipo = "Débito";
 
-	if (tmp->livro_razao == NULL || !strcmp(tmp->livro_razao, ""))
-	{
-		tmp->livro_razao = malloc(sizeof(char) * 230);
-		if (tmp->livro_razao == NULL)
-			Security_Error(__FILE__, __LINE__);
-
-		/* ocupa					 28 chars				 + 	8 chars  + 24 chars 	= 60 chars (no pior caso) */
-		sprintf(tmp->livro_razao, "Débito:[montante:%.2lf€ data:(%s)]\0", montante, time_str());
-	}
-	else
-	{
-		if (tmp->livro_razao == NULL)
-		{
-			tmp->livro_razao = malloc(sizeof(char) * 230);
-			if (tmp->livro_razao == NULL)
-				Security_Error(__FILE__, __LINE__);
-		}
-
-		/* max: ~215 char */
-		sprintf(tmp->livro_razao, "%s_Débito:[montante:%.2lf€ data:(%s)]\0", tmp->livro_razao, montante, time_str());
-	}
+	Stack_Push_Movimentos(&tmp->movimentos, aux);
 
 	dialogo(OperacaoConcluida);
 

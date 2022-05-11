@@ -162,11 +162,13 @@
     <ClCompile Include="remover_cliente.c" />
     <ClCompile Include="remover_conta.c" />
     <ClCompile Include="security.c" />
+    <ClCompile Include="stack.c" />
     <ClCompile Include="time.c" />
   </ItemGroup>
   <ItemGroup>
     <None Include="clientes.csv" />
     <None Include="contas.csv" />
+    <None Include="Movimentos.csv" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

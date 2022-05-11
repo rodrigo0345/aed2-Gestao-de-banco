@@ -34,9 +34,9 @@ void* Criar_Contas(Clientes** clts, Contas** cnts, uint* clts_size, uint* cnts_s
 	{
 		tmp->tipo = 0;
 	}
+
 	tmp->id = ++(*cnts_size);
 	tmp->id_owner = result->id;
-	tmp->livro_razao = "";
 	tmp->saldo = 0;
 
 	char* new_str = (char*)malloc(sizeof(char) * (70 + 1));

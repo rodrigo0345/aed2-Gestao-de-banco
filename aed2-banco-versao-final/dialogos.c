@@ -123,7 +123,7 @@ void dialogo(int id)
 		SetConsoleTextAttribute(h, 3);
 		printf("\n[3]");
 		SetConsoleTextAttribute(h, 7);
-		printf("-|DATA DE NASCIMENTO|  ");
+		printf("-|DATA DE NASCIMENTO|-  ");
 	}
 	break;
 	case Localidade:
@@ -241,11 +241,11 @@ void dialogo(int id)
 		SetConsoleTextAttribute(h, 3);
 		printf("\n[1] - ");
 		SetConsoleTextAttribute(h, 7);
-		printf("Consultar a sua posição global\n");
+		printf("Consultar a sua posição global do cliente\n");
 		SetConsoleTextAttribute(h, 3);
 		printf("[2] - ");
 		SetConsoleTextAttribute(h, 7);
-		printf("Guardar o livro-razão da conta num ficheiro .txt\n");
+		printf("Listar Movimentos da conta\n");
 		SetConsoleTextAttribute(h, 6);
 		printf("\n[INTRODUZA O ALGARISMO REFERENTE À SUA ESCOLHA] - ");
 	break;
@@ -306,7 +306,7 @@ void dialogo(int id)
 		printf("\n[O ID ESCOLHIDO NÃO EXISTE]");
 		break;
 	case SelecioneOpcao:
-		printf("\n[SELECIONE UMA OPÇÃO]");
+		printf("\n[SELECIONE UMA OPÇÃO] - ");
 		break;
 	case SemContas:
 		SetConsoleTextAttribute(h, 6);
@@ -327,6 +327,10 @@ void dialogo(int id)
 	case MontanteInvalido:
 		SetConsoleTextAttribute(h, 6);
 		LOG_WARNING("[MONTANTE INVÁLIDO]");
+		break;
+	case SemMovimentos:
+		SetConsoleTextAttribute(h, 6);
+		LOG_WARNING("[NÃO EXISTEM TRANSAÇÕES ASSOCIADAS A ESTA CONTA]");
 		break;
 	default:
 		SetConsoleTextAttribute(h, 6);

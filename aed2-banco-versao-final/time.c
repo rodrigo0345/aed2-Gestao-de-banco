@@ -25,6 +25,7 @@ char* time_str()
 	char* time_str = malloc(sizeof(char) * 20);
 
 	time_str = ctime(&mytime);
+
 	time_str[strlen(time_str) - 1] = '\0';
 	return time_str;
 }

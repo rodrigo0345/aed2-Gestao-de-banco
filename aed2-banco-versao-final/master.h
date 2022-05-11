@@ -86,9 +86,6 @@ uint Security_Login(Clientes** clts, Clientes** result, char* guess, uint* id);
 /* Ferramenta de debugging acessada pelo terminal */
 void Security_Flags(char* argv[]);
 
-/* Guarda o livro razão de uma conta num ficheiro .txt */
-void Security_FileLivroRazao(Contas* curr);
-
 /* Move os dados dos utilizadores dos ficheiros .csv para as listas ligadas */
 void Files_LoadMemory(Clientes** clts, Contas** cnts, uint* clts_size, uint* cnts_size);
 
@@ -144,6 +141,7 @@ enum dialogos { /* organiza as falas com os utilizadores*/
 	ClienteRemovidoSucesso,
 	Montante,
 	MontanteInvalido,
+	SemMovimentos,
 };
 
 /* Comandos disponiveis:
@@ -178,5 +176,13 @@ enum dialogos { /* organiza as falas com os utilizadores*/
 	- ClienteRemovidoSucesso
 	- Montante
 	- MontanteInvalido
+	- SemMovimentos
 */
 void dialogo(int id);
+
+/* Stack */
+Movimentos* Stack_Create_Movimentos(uint id_conta);
+void Stack_Push_Movimentos(Movimentos** s, Movimentos* d);
+void Stack_Pop_Movimentos(Movimentos** s);
+Movimentos* Stack_Peek_Movimentos(Movimentos* s);
+void Stack_Show_Movimentos(Movimentos* s);

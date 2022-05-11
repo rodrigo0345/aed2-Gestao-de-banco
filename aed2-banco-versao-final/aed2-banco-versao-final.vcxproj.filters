@@ -92,12 +92,18 @@
     <ClCompile Include="dev_tools.c">
       <Filter>Arquivos de Origem</Filter>
     </ClCompile>
+    <ClCompile Include="stack.c">
+      <Filter>Arquivos de Origem</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="clientes.csv">
       <Filter>Arquivos de Recurso</Filter>
     </None>
     <None Include="contas.csv">
+      <Filter>Arquivos de Recurso</Filter>
+    </None>
+    <None Include="Movimentos.csv">
       <Filter>Arquivos de Recurso</Filter>
     </None>
   </ItemGroup>

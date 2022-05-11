@@ -16,6 +16,7 @@ void* Consultar_Contas(Clientes** clts, Contas** cnts, uint* clts_size, uint* cn
 
 	uint curr_id = opcao;
 	Contas* curr = LinkedList_BinarySearch_Contas(*cnts, curr_id);
+
 	if (curr == NULL || result->id != curr->id_owner)
 	{
 		dialogo(SemClientes);
@@ -69,7 +70,7 @@ void* Consultar_Contas(Clientes** clts, Contas** cnts, uint* clts_size, uint* cn
 	}
 	else if (opcao == 2)
 	{
-		Security_FileLivroRazao(curr);
+		Stack_Show_Movimentos(curr->movimentos);
 	}
 	else
 	{
