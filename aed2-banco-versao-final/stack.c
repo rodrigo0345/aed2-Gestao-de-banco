@@ -1,7 +1,7 @@
 #include "master.h"
 #include "structs.h"
 
-/* cada movimento precisa de estar associado a uma conta! */
+/* cada movimento precisa de estar associado a uma conta, dai passarmos o id_conta! */
 Movimentos* Stack_Create_Movimentos(uint id_conta) 
 {
 	Movimentos* aux = (Movimentos*)malloc(sizeof(Movimentos));

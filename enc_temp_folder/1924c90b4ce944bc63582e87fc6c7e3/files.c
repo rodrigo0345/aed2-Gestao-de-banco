@@ -154,7 +154,7 @@ void Files_LoadMemory(Clientes** clts, Contas** cnts, uint* clts_size, uint* cnt
 		if (tmp->data == NULL)
 			Security_Error(__FILE__, __LINE__);
 
-		if(key[strlen(key) - 1] == '\n')
+		if(!strcmp(key[strlen(key) - 1], '\n'))
 			key[strlen(key) - 1] = '\0';
 
 		strcpy(tmp->data, key);

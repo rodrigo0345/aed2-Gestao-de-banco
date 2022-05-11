@@ -2,6 +2,7 @@
 #include "master.h"
 #define CONSTANTE 5
 
+/* é preciso mudar isto */
 void DevTools_Generate(long number)
 {
 	FILE* clientes = fopen("clientes.csv", "w"); FILE* contas = fopen("contas.csv", "w");
