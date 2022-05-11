@@ -1,2 +1,4 @@
 id conta;tipo;montante;data
-2;Débito;30,00€;Wed May 11 14:06:15 2022
+1;Crédito;10,00€;Wed May 11 14:15:38 2022
+1;Débito;20,00€;Wed May 11 14:15:38 2022
+1;Débito;30,40€;Wed May 11 14:15:38 2022

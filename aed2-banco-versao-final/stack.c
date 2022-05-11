@@ -36,6 +36,8 @@ void Stack_Pop_Movimentos(Movimentos** s)
 	aux = *s;
 	if (*s != NULL) {
 		*s = aux->next;
+
+		free(aux->data);
 		free(aux);
 		aux = NULL;
 	}

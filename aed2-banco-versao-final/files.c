@@ -196,7 +196,7 @@ void Files_SaveMemory(Clientes** clts, Contas** cnts)
 		Movimentos* aux = tmp->movimentos;
 		while (aux != NULL)
 		{
-			fprintf(os_movimentos, "%d;%s;%.2lf€;%s",	aux->id_conta, aux->tipo, aux->montante, aux->data);							
+			fprintf(os_movimentos, "%d;%s;%.2lf€;%s\n",	aux->id_conta, aux->tipo, aux->montante, aux->data);							
 			aux = aux->next;
 		}
 

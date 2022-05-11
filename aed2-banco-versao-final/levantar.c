@@ -44,7 +44,7 @@ void* Operacoes_Levantar(Clientes** clts, Contas** cnts, uint* clts_size, uint* 
 	result->saldo_global -= montante;
 
 	/* guarda a transação */
-	Movimentos* aux = Stack_Create_Movimentos(id);
+	Movimentos* aux = Stack_Create_Movimentos(tmp->id);
 
 	aux->data = time_str();
 	aux->montante = montante;
