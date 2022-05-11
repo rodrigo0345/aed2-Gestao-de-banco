@@ -168,7 +168,7 @@
   <ItemGroup>
     <None Include="clientes.csv" />
     <None Include="contas.csv" />
-    <None Include="Movimentos.csv" />
+    <None Include="movimentos.csv" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

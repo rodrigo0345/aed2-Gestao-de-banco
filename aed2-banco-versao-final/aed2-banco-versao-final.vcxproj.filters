@@ -103,7 +103,7 @@
     <None Include="contas.csv">
       <Filter>Arquivos de Recurso</Filter>
     </None>
-    <None Include="Movimentos.csv">
+    <None Include="movimentos.csv">
       <Filter>Arquivos de Recurso</Filter>
     </None>
   </ItemGroup>

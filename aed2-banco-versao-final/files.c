@@ -186,13 +186,21 @@ void Files_SaveMemory(Clientes** clts, Contas** cnts)
 	FILE* as_contas = fopen("contas.csv", "w");
 	FILE* os_movimentos = fopen("movimentos.csv", "w");
 
-	fprintf(as_contas, "%s\n", "ID;Id do proprietário;ordem ou prazo;saldo;livro-razão");
+	fprintf(as_contas, "%s\n", "ID;Id do proprietário;ordem ou prazo;saldo");
+	fprintf(os_movimentos, "%s\n", "id conta;tipo;montante;data");
 
 	Contas* tmp;
 	for (tmp = *cnts; tmp != NULL; tmp = tmp->next)
 	{
+		/* O(n^2), sabemos não ser o mais adequado porém já não tivemos tempo para arranjar um mecanismo mais eficiente */
+		Movimentos* aux = tmp->movimentos;
+		while (aux != NULL)
+		{
+			fprintf(os_movimentos, "%d;%s;%.2lf€;%s",	aux->id_conta, aux->tipo, aux->montante, aux->data);							
+			aux = aux->next;
+		}
 
-		fprintf(as_contas, "%d;%d;%d;%.2lf\n", tmp->id, tmp->id_owner, tmp->tipo, tmp->saldo);
+		fprintf(as_contas, "%d;%d;%d;%.2lf€\n", tmp->id, tmp->id_owner, tmp->tipo, tmp->saldo);
 	}
 	fclose(as_contas);
 	fclose(os_movimentos);
