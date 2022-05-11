@@ -237,7 +237,7 @@ void dialogo(int id)
 	break;
 	case ConsultarConta:
 		SetConsoleTextAttribute(h, 6);
-		printf("[DEFINIÇÕES DA CONTA]\n");
+		printf("\n[DEFINIÇÕES DA CONTA]\n");
 		SetConsoleTextAttribute(h, 3);
 		printf("\n[1] - ");
 		SetConsoleTextAttribute(h, 7);

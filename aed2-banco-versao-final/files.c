@@ -73,12 +73,6 @@ void Files_LoadMemory(Clientes** clts, Contas** cnts, uint* clts_size, uint* cnt
 
 		(*clts_size)++;
 		LinkedList_AppendHead_Clientes(clts, *tmp);
-
-		if (tmp->contas_associadas != NULL)
-		{
-			free(tmp->contas_associadas);
-			tmp->contas_associadas = NULL;
-		}	
 	}
 
 	free(tmp);

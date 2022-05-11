@@ -23,7 +23,10 @@ typedef struct Cliente {
 	char* nome;
 	char* data;
 	char* morada;
-	char* contas_associadas; /* 70 carateres */
+
+	/* 70 carateres */
+	char* contas_associadas;
+
 	double saldo_global;
 
 	struct Cliente* next;

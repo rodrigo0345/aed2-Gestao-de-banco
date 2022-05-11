@@ -367,11 +367,11 @@ uint LinkedList_ShowContas_Clientes(Clientes* cliente, Contas** cnts)
 
 		if (tmp->tipo == 1)
 		{
-			printf("ID[%u]\tSaldo[%.2lf]\tTipo[%s]\n", id, tmp->saldo, "Prazo");
+			printf("\nID[%u]\tSaldo[%.2lf]\tTipo[%s]\n", id, tmp->saldo, "Prazo");
 		}
 		else
 		{
-			printf("ID[%u]\tsaldo[%.2lf]\ttipo[%s]\n", id, tmp->saldo, "Ordem");
+			printf("\nID[%u]\tsaldo[%.2lf]\ttipo[%s]\n", id, tmp->saldo, "Ordem");
 		}
 
 		key = strtok(NULL, "/");
