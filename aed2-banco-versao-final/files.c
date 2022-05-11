@@ -31,7 +31,7 @@ void Files_LoadMemory(Clientes** clts, Contas** cnts, uint* clts_size, uint* cnt
 		strcpy(tmp->pin, key);
 
 		key = strtok(NULL, ";");
-		tmp->nome = malloc(sizeof(char) * 60);
+		tmp->nome = malloc(sizeof(char) * 50);
 		if (tmp->nome == NULL)
 			Security_Error(__FILE__, __LINE__);
 		strcat(key, "\0");
@@ -45,7 +45,7 @@ void Files_LoadMemory(Clientes** clts, Contas** cnts, uint* clts_size, uint* cnt
 		strcpy(tmp->data, key);
 
 		key = strtok(NULL, ";");
-		tmp->morada = malloc(sizeof(char) * 60);
+		tmp->morada = malloc(sizeof(char) *50);
 		if (tmp->morada == NULL)
 			Security_Error(__FILE__, __LINE__);
 		strcat(key, "\0");
@@ -59,7 +59,11 @@ void Files_LoadMemory(Clientes** clts, Contas** cnts, uint* clts_size, uint* cnt
 		tmp->contas_associadas = malloc(sizeof(char) * 70);
 		if (tmp->contas_associadas == NULL)
 			Security_Error(__FILE__, __LINE__);
-		if (atoi(key) == 0) tmp->contas_associadas = NULL;
+		if (atoi(key) == 0)
+		{
+			free(tmp->contas_associadas);
+			tmp->contas_associadas = NULL;
+		}
 		else
 		{
 			key[strlen(key) - 1] = '\0';  /* retira o \n do final da string para facilitar a manipulação de dados */
@@ -69,8 +73,15 @@ void Files_LoadMemory(Clientes** clts, Contas** cnts, uint* clts_size, uint* cnt
 
 		(*clts_size)++;
 		LinkedList_AppendHead_Clientes(clts, *tmp);
+
+		if (tmp->contas_associadas != NULL)
+		{
+			free(tmp->contas_associadas);
+			tmp->contas_associadas = NULL;
+		}	
 	}
 
+	free(tmp);
 	fclose(ficheiro);
 
 	/* abrir o ficheiro contas.csv */
@@ -107,6 +118,7 @@ void Files_LoadMemory(Clientes** clts, Contas** cnts, uint* clts_size, uint* cnt
 		LinkedList_AppendHead_Contas(cnts, *tmp2);
 	}
 
+	free(tmp2);
 	fclose(ficheiro2);
 
 	/* abrir o ficheiro movimentos.csv */
@@ -132,34 +144,34 @@ void Files_LoadMemory(Clientes** clts, Contas** cnts, uint* clts_size, uint* cnt
 			continue;
 		}
 
-		Movimentos* tmp = Stack_Create_Movimentos(id);
+		Movimentos* tmp3 = Stack_Create_Movimentos(id);
 	
 		/* tipo de movimento (credito ou debito)*/
 		key = strtok(NULL, ";");
-		tmp->tipo = (char*)malloc(sizeof(char) * 60);
-		if (tmp->tipo == NULL)
+		tmp3->tipo = (char*)malloc(sizeof(char) * 60);
+		if (tmp3->tipo == NULL)
 			Security_Error(__FILE__, __LINE__);
 		strcat(key, "\0");
-		strcpy(tmp->tipo, key);
+		strcpy(tmp3->tipo, key);
 
 		/* montante */
 		key = strtok(NULL, ";");
 		Security_Replace_Char(key, ',', '.');
-		tmp->montante = atof(key);
+		tmp3->montante = atof(key);
 
 		/* data */
 		key = strtok(NULL, ";");
-		tmp->data = (char*)malloc(sizeof(char) * 60);
+		tmp3->data = (char*)malloc(sizeof(char) * 30);
 
-		if (tmp->data == NULL)
+		if (tmp3->data == NULL)
 			Security_Error(__FILE__, __LINE__);
 
 		if(key[strlen(key) - 1] == '\n')
 			key[strlen(key) - 1] = '\0';
 
-		strcpy(tmp->data, key);
+		strcpy(tmp3->data, key);
 
-		Stack_Push_Movimentos(&(aux->movimentos), tmp);
+		Stack_Push_Movimentos(&(aux->movimentos), tmp3);
 	}
 
 	fclose(ficheiro3);

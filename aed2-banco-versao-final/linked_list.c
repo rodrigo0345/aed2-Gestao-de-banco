@@ -237,14 +237,15 @@ void LinkedList_Delete_Clientes(Clientes** head_ref)
 	{
 		next = current->next;
 
-		/* muitos problemas a libertar memoria */
-
-		free(current->contas_associadas);
-		free(current->data); /* temos aqui um erro */
 		free(current->morada);
+
+		if(current->contas_associadas != NULL)
+			free(current->contas_associadas);
+
 		free(current->nome);
 		free(current->pin);
-
+		free(current->data);
+	
 		free(current);
 		current = next;
 	}

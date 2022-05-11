@@ -48,7 +48,7 @@ void* Operacoes_Depositar(Clientes** clts, Contas** cnts, uint* clts_size, uint*
 
 	aux->data = time_str();
 	aux->montante = montante;
-	aux->tipo = "Débito";
+	strcpy(aux->tipo,"Débito");
 
 	Stack_Push_Movimentos(&tmp->movimentos, aux);
 

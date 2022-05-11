@@ -9,6 +9,7 @@ Movimentos* Stack_Create_Movimentos(uint id_conta)
 	aux->data = NULL;
 	aux->id_conta = id_conta;
 	aux->montante = 0;
+	aux->tipo = (char*)malloc(8 * sizeof(char));
 	aux->next = NULL;
 
 	return aux;
@@ -16,7 +17,7 @@ Movimentos* Stack_Create_Movimentos(uint id_conta)
 
 void Stack_Push_Movimentos(Movimentos** s, Movimentos* d)
 {
-	Movimentos* elemento = (Movimentos*)malloc(sizeof(Movimentos));
+	Movimentos* elemento;
 
 	elemento = d;
 	elemento->next = NULL;
@@ -37,6 +38,7 @@ void Stack_Pop_Movimentos(Movimentos** s)
 	if (*s != NULL) {
 		*s = aux->next;
 
+		free(aux->tipo);
 		free(aux->data);
 		free(aux);
 		aux = NULL;
