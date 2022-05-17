@@ -1,0 +1,13 @@
+id conta;tipo;montante;data
+1;Débito;10,00€;Wed May 11 23:03:19 2022
+1;Débito;134,30€;Wed May 11 22:53:10 2022
+1;Crédito;10,00€;Wed May 11 14:15:38 2022
+1;Débito;20,00€;Wed May 11 14:15:38 2022
+1;Débito;30,40€;Wed May 11 14:15:38 2022
+1;Crédito;20,20€;Wed May 11 14:31:42 2022
+1;Débito;40,00€;Wed May 11 15:46:37 2022
+1;Débito;1000,00€;Wed May 11 22:59:44 2022
+1;Crédito;1200,00€;Wed May 11 22:59:44 2022
+2;Débito;10,20€;Wed May 11 22:42:11 2022
+3;Crédito;300,00€;Wed May 11 22:55:22 2022
+5;Débito;20,30€;Wed May 11 22:49:57 2022

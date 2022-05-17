@@ -23,6 +23,7 @@ Contas* LinkedList_New_Contas()
 	if (tmp == NULL) Security_Error(__FILE__, __LINE__);
 
 	/* informacoes padrao que precisam de ser NULL */
+	tmp->movimentos = NULL;
 	tmp->next = NULL;
 	tmp->prev = NULL;
 
@@ -236,15 +237,12 @@ void LinkedList_Delete_Clientes(Clientes** head_ref)
 	{
 		next = current->next;
 
-		/* muitos problemas a libertar memoria */
-
-		//if (current->contas_associadas) /* contas_associadas tanto pode ter espaço alocado como não */
-			//free(current->contas_associadas);
-		//free(current->data); /* temos aqui um erro */
-		//free(current->morada);
-		//free(current->nome);
-		//free(current->pin);
-
+		free(current->morada);
+		free(current->contas_associadas);
+		free(current->nome);
+		free(current->pin);
+		free(current->data);
+	
 		free(current);
 		current = next;
 	}
@@ -263,11 +261,9 @@ void LinkedList_Delete_Contas(Contas** head_ref)
 	{
 		next = current->next;
 
-		/* muitos problemas a libertar memoria */
+		/* apaga os movimentos associados à conta */
+		Stack_Destroy_Movimentos(&(current->movimentos));
 
-		//if (current->livro_razao)  /* livro_razao tanto pode ter espaço alocado como não */
-			//free(current->livro_razao);
-		
 		free(current);
 		current = next;
 	}
@@ -283,6 +279,7 @@ void LinkedList_Reverse_Cliente(Clientes** head_ref)
 	Clientes* prev = NULL;
 	Clientes* current = *head_ref;
 	Clientes* next = NULL;
+
 	while (current != NULL) {
 		// Store next
 		next = current->next;
@@ -368,11 +365,11 @@ uint LinkedList_ShowContas_Clientes(Clientes* cliente, Contas** cnts)
 
 		if (tmp->tipo == 1)
 		{
-			printf("ID[%u]\tSaldo[%.2lf]\tTipo[%s]\n", id, tmp->saldo, "Prazo");
+			printf("\nID[%u]\tSaldo[%.2lf]\tTipo[%s]\n", id, tmp->saldo, "Prazo");
 		}
 		else
 		{
-			printf("ID[%u]\tsaldo[%.2lf]\ttipo[%s]\n", id, tmp->saldo, "Ordem");
+			printf("\nID[%u]\tsaldo[%.2lf]\ttipo[%s]\n", id, tmp->saldo, "Ordem");
 		}
 
 		key = strtok(NULL, "/");

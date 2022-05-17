@@ -9,7 +9,7 @@ void* Criar_Clientes(Clientes** clts, Contas** cnts, uint* clts_size, uint* cnts
 	Clientes* novo = LinkedList_New_Clientes();
 	novo->saldo_global = 0;
 
-	char string[50] = { 0 };
+	char* string = (char*)malloc(sizeof(char) * 60);
 	scanf_s("%[^\n]%*c", string, 50);
 	fflush(stdin);
 
@@ -24,7 +24,7 @@ void* Criar_Clientes(Clientes** clts, Contas** cnts, uint* clts_size, uint* cnts
 		novo = NULL;
 		return NULL;
 	}
-	novo->nome = (char*)malloc(strlen(string) * sizeof(char));
+	novo->nome = (char*)malloc(50 * sizeof(char));
 	if (novo->nome == NULL)
 		Security_Error(__FILE__, __LINE__);
 	strcpy(novo->nome, string);
@@ -43,8 +43,9 @@ void* Criar_Clientes(Clientes** clts, Contas** cnts, uint* clts_size, uint* cnts
 		int check = getchar();
 		return NULL;
 	}
+
 	Security_Encrypt_String(string);
-	novo->pin = (char*)malloc(strlen(string) * sizeof(char));
+	novo->pin = (char*)malloc(8 * sizeof(char));
 	if (novo->pin == NULL)
 		Security_Error(__FILE__, __LINE__);
 	strcpy(novo->pin, string);
@@ -74,14 +75,13 @@ void* Criar_Clientes(Clientes** clts, Contas** cnts, uint* clts_size, uint* cnts
 	
 	dialogo(Localidade);
 	scanf_s(" %[^\n]%*c", string, 50);
-	novo->morada = (char*)malloc(strlen(string) * sizeof(char));
+	novo->morada = (char*)malloc(50 * sizeof(char));
 	if (novo->morada == NULL)
 		Security_Error(__FILE__, __LINE__);
 	fflush(stdin);
 
 	strcpy(novo->morada, string);
 	
-
 	novo->id = (*clts_size)++;
 
 	LinkedList_AppendHead_Clientes(clts, *novo);
@@ -97,6 +97,7 @@ void* Criar_Clientes(Clientes** clts, Contas** cnts, uint* clts_size, uint* cnts
 	printf("|\n");
 
 	free(novo);
+	free(string);
 
 	int check = getchar();
 

@@ -19,9 +19,6 @@ void* Remover_Clientes(Clientes** clts, Contas** cnts, uint* clts_size, uint* cn
 
 	dialogo(ClienteRemovidoSucesso);
 
-	free(result);
-	result = NULL;
-
 	int check = getchar();
 	return NULL;
 }

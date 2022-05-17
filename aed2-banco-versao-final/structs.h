@@ -4,6 +4,17 @@ typedef unsigned int uint;
 
 /* --- Principais structs do programa ---*/
 
+/* stack */
+typedef struct movimento
+{
+	uint id_conta;
+	double montante;
+	char* tipo;
+	char* data;
+
+	struct movimento* next;
+} Movimentos;
+
 /* São ambas listas-ligadas duplas pois são mais eficientes na altura de remover "nodes" */
 typedef struct Cliente {
 	uint id;
@@ -12,7 +23,10 @@ typedef struct Cliente {
 	char* nome;
 	char* data;
 	char* morada;
-	char* contas_associadas; /* 70 carateres */
+
+	/* 70 carateres */
+	char* contas_associadas;
+
 	double saldo_global;
 
 	struct Cliente* next;
@@ -26,7 +40,9 @@ typedef struct Conta {
 	/* 0 = Ordem, 1 = Prazo */
 	short tipo;
 	double saldo;
-	char* livro_razao; /* 150 carateres */
+
+	/* apontador para o topo da stack dos movimentos */
+	Movimentos* movimentos;
 
 	struct Conta* next;
 	struct Conta* prev;

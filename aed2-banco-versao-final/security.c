@@ -18,7 +18,7 @@ void Security_ProgramExit_Global(Clientes* clts, Contas* cnts)
 {
 	LinkedList_Delete_Clientes(&clts);
 	LinkedList_Delete_Contas(&cnts);
-	exit(0);
+	//exit(0);
 }
 
 /* Método alternativo ao scanf, apenas funciona para numeros */
@@ -114,8 +114,6 @@ uint Security_Login(Clientes** clts, Clientes** result, char* guess, uint* id)
 		dialogo(CodigoInvalido);
 
 		int check = getchar();
-		free(*result);
-		*result = NULL;
 		return 0;
 	}
 	return 1;
@@ -129,35 +127,6 @@ void Security_Flags(char* argv[])
 	{
 		DevTools_Options();
 	}
-}
-
-/* Cria um ficheiro .txt para guardar o livro-razão de uma conta */
-void Security_FileLivroRazao(Contas* curr)
-{
-	char filename[30];
-
-	/* armazenamos o nome do ficheiro a ser criado em "filename" */
-	sprintf(filename, "%s[%d].txt", "Livro-Razao", curr->id);
-	printf("-| Localização do ficheiro |- %s", __FILE__);
-
-	FILE* open = fopen(filename, "w");
-	if (open == NULL)
-		Security_Error(__FILE__, __LINE__);
-
-	char* key = strtok(curr->livro_razao, ",");
-	while (key != NULL)
-	{
-		fprintf(open, "%s\n", key);
-		key = strtok(NULL, ",");
-	}
-
-	fclose(open);
-
-	HANDLE h = GetStdHandle(STD_OUTPUT_HANDLE);
-	SetConsoleTextAttribute(h, 6);
-	printf("\n[FICHEIRO CRIADO COM SUCESSO]");
-
-	int check = getchar();
 }
 
 void Security_Replace_Char(char* s, char ch, char repl) {

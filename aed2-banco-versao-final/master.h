@@ -9,11 +9,17 @@
 #include <locale.h>
 #include <windows.h>
 #include <conio.h>
-#include <crtdbg.h> /* usado para detetar memory leaks no visual studio 2022 */
+
+/* usado para detetar memory leaks no visual studio 2022 */
+#include <crtdbg.h> 
+
 #include "master.h"
 #include "structs.h"
 
 #define LOG_WARNING(msg) printf("\nAviso: %s\n", msg);
+
+/* menu principal do programa */
+void Menu_MainLoop(Clientes** clts, Contas** cnts, uint* clts_size, uint* cnts_size);
 
 /* --- Clientes --- */
 
@@ -86,9 +92,6 @@ uint Security_Login(Clientes** clts, Clientes** result, char* guess, uint* id);
 /* Ferramenta de debugging acessada pelo terminal */
 void Security_Flags(char* argv[]);
 
-/* Guarda o livro razão de uma conta num ficheiro .txt */
-void Security_FileLivroRazao(Contas* curr);
-
 /* Move os dados dos utilizadores dos ficheiros .csv para as listas ligadas */
 void Files_LoadMemory(Clientes** clts, Contas** cnts, uint* clts_size, uint* cnts_size);
 
@@ -144,6 +147,7 @@ enum dialogos { /* organiza as falas com os utilizadores*/
 	ClienteRemovidoSucesso,
 	Montante,
 	MontanteInvalido,
+	SemMovimentos,
 };
 
 /* Comandos disponiveis:
@@ -178,5 +182,11 @@ enum dialogos { /* organiza as falas com os utilizadores*/
 	- ClienteRemovidoSucesso
 	- Montante
 	- MontanteInvalido
+	- SemMovimentos
 */
 void dialogo(int id);
+
+/* Stack dos movimentos */
+Movimentos* Stack_Create_Movimentos(uint id_conta);
+void Stack_Push_Movimentos(Movimentos** s, Movimentos* d);
+void Stack_Show_Movimentos(Movimentos* s);

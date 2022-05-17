@@ -1,18 +1,5 @@
 id;palavra-passe;nome;data de nascimento;morada;saldo global;contas
-0;0369<@;Rodriog;22/6/2003;Barcelos;1029,90;1/2
-1;0369<@;Brr;22/6/2000;Barcelos;0,00;(null)
-2;0369<@;Rodrigo;22/6/2002;Braga;0,00;(null)
-3;0369<@;Rodrigo;22/6/2003;Barcelos;0,00;(null)
-4;0369<@;rodrigo;22/6/2000;Barcelos;0,00;(null)
-5;0369<@;Rodrigo;22/6/2000;Barcelos;0,00;(null)
-6;0369<@;Rodrigo;22/6/2000;Barcelso;0,00;(null)
-7;0369<@;Rodrigo;22/6/2000;Barcelos;0,00;(null)
-8;0369<@;Rodrigo;22/6/2000;Barcelos;0,00;(null)
-9;0369<@;Rodrigo;22/6/2000;Barcelos;0,00;(null)
-10;0369<@;Rodrigo;22/6/2000;Barcelos;0,00;(null)
-11;0369<@;Rodrigo;22/6/2000;BArcelos;0,00;(null)
-12;0369=;er;22/6/2000;Barcelos;0,00;(null)
-13;0369<@;Rodrigo;22/6/2000;Barcelos;0,00;(null)
-14;0369<@;Rodrigo;22/6/2003;Barcelos;0,00;(null)
-15;0369<@;Rodrigo;22/6/2003;Barcelos;0,00;(null)
-16;0369<@;Rodrigo;22/6/2003;Barcelos;0,00;(null)
+0;0369<@;Rodrigo;22/6/2003;Barcelos;4,50;1
+1;0369<@;Ines;20/11/2002;Braga;10,20;2
+2;0369<@;Catarina;3/10/2003;Braga;-300,00;3/4
+3;0369<@;teste;22/3/2000;Braga;20,30;4/5
