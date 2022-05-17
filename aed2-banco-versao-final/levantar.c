@@ -3,7 +3,7 @@
 
 void* Operacoes_Levantar(Clientes** clts, Contas** cnts, uint* clts_size, uint* cnts_size)
 {
-	/* login necessário para editar conta */
+	/* login necessÃ¡rio para editar conta */
 	char guess[40]; uint id; Clientes* result;
 	if (!Security_Login(clts, &result, guess, &id)) return NULL;
 
@@ -43,14 +43,16 @@ void* Operacoes_Levantar(Clientes** clts, Contas** cnts, uint* clts_size, uint* 
 	tmp->saldo -= montante;
 	result->saldo_global -= montante;
 
-	/* guarda a transação */
+	/* guarda a transaï¿½ï¿½o */
 	Movimentos* aux = Stack_Create_Movimentos(tmp->id);
 
 	aux->data = time_str();
 	aux->montante = montante;
-	strcpy(aux->tipo, "Crédito");
+	strcpy(aux->tipo, "Crï¿½dito");
+
 
 	Stack_Push_Movimentos(&tmp->movimentos, aux);
+
 
 	dialogo(OperacaoConcluida);
 
