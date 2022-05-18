@@ -48,7 +48,7 @@ void* Operacoes_Levantar(Clientes** clts, Contas** cnts, uint* clts_size, uint* 
 
 	aux->data = time_str();
 	aux->montante = montante;
-	strcpy(aux->tipo, "Cr�dito");
+	strcpy(aux->tipo, "Débito");
 
 
 	Stack_Push_Movimentos(&tmp->movimentos, aux);
