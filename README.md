@@ -10,6 +10,6 @@
   <li><img src="https://user-images.githubusercontent.com/48099106/159011582-eb2754dd-323e-49ef-a72b-0f151d36c037.png"></img></li>
   <li><img src="https://user-images.githubusercontent.com/48099106/159011821-c48435b6-331e-412d-9e2a-94090a6675fd.png"></img></li>
 </ul>
-<h2>Universidade responsável:</h2>
+<h2>Universidade:</h2>
 <p><a href="https://www.uminho.pt/PT" rel="external" target="_blank"><img src="https://fit4rri.eu/wp-content/uploads/2017/08/10-UMINHO-01-846x528.png" align="left" width="160" height="100"><img></p>
 
